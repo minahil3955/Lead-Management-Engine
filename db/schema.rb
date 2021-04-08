@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_102417) do
+ActiveRecord::Schema.define(version: 2021_04_08_115708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
-    t.string "client_name"
-    t.string "client_address"
-    t.string "client_email"
-    t.string "client_contact"
+    t.string "name"
+    t.string "address"
+    t.string "email"
+    t.string "contact"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "comment_line"
+    t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -35,9 +35,8 @@ ActiveRecord::Schema.define(version: 2021_04_08_102417) do
     t.bigint "phase_id"
     t.bigint "project_id"
     t.bigint "client_id"
-    t.string "lead_name"
+    t.string "name"
     t.string "platform"
-    t.date "joining_date"
     t.integer "is_sale"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -57,19 +56,21 @@ ActiveRecord::Schema.define(version: 2021_04_08_102417) do
   end
 
   create_table "phases", force: :cascade do |t|
-    t.string "phase_type"
-    t.date "start_date"
+    t.string "type"
     t.date "due_date"
-    t.date "creation_date"
-    t.integer "phase_status"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "project_name"
-    t.string "project_assignee"
-    t.date "transition_date"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -82,7 +83,6 @@ ActiveRecord::Schema.define(version: 2021_04_08_102417) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
