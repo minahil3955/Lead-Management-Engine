@@ -1,13 +1,14 @@
 class CreateFormerLeads < ActiveRecord::Migration[6.1]
   def change
     create_table :former_leads do |t|
-      t.string :name
-      t.string :address
-      t.string :email
-      t.string :contact
+      t.belongs_to :user, foreign_key: true
+      t.belongs_to :phase, foreign_key: true
+      t.belongs_to :project, foreign_key: true
+      t.belongs_to :client, foreign_key: true
+      t.string :lead_name
       t.string :platform
       t.date :joining_date
-      t.boolean :is_sale
+      t.integer :is_sale
 
       t.timestamps
     end

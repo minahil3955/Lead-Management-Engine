@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_100810) do
+ActiveRecord::Schema.define(version: 2021_04_08_102417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clients", force: :cascade do |t|
+    t.string "client_name"
+    t.string "client_address"
+    t.string "client_email"
+    t.string "client_contact"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "comment_line"
@@ -22,23 +31,37 @@ ActiveRecord::Schema.define(version: 2021_04_07_100810) do
   end
 
   create_table "former_leads", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "email"
-    t.string "contact"
+    t.bigint "user_id"
+    t.bigint "phase_id"
+    t.bigint "project_id"
+    t.bigint "client_id"
+    t.string "lead_name"
     t.string "platform"
     t.date "joining_date"
-    t.boolean "is_sale"
+    t.integer "is_sale"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_former_leads_on_client_id"
+    t.index ["phase_id"], name: "index_former_leads_on_phase_id"
+    t.index ["project_id"], name: "index_former_leads_on_project_id"
+    t.index ["user_id"], name: "index_former_leads_on_user_id"
+  end
+
+  create_table "phase_users", force: :cascade do |t|
+    t.bigint "phase_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["phase_id"], name: "index_phase_users_on_phase_id"
+    t.index ["user_id"], name: "index_phase_users_on_user_id"
   end
 
   create_table "phases", force: :cascade do |t|
     t.string "phase_type"
-    t.string "assignee"
     t.date "start_date"
     t.date "due_date"
     t.date "creation_date"
+    t.integer "phase_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -64,4 +87,8 @@ ActiveRecord::Schema.define(version: 2021_04_07_100810) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "former_leads", "clients"
+  add_foreign_key "former_leads", "phases"
+  add_foreign_key "former_leads", "projects"
+  add_foreign_key "former_leads", "users"
 end

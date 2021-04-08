@@ -1,6 +1,8 @@
 class FormerLead < ApplicationRecord
-  has_one :user
-  has_one :project
-  has_many :comments
-  has_and_belongs_to_many :phases
+  belongs_to :user
+  belongs_to :phase
+  belongs_to :project
+  belongs_to :client
+  has_many :comments, as: :commentable
+  enum is_sale: %i[open close], _default: :close
 end
