@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_115708) do
+ActiveRecord::Schema.define(version: 2021_04_08_124925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,22 +30,6 @@ ActiveRecord::Schema.define(version: 2021_04_08_115708) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "former_leads", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "phase_id"
-    t.bigint "project_id"
-    t.bigint "client_id"
-    t.string "name"
-    t.string "platform"
-    t.integer "is_sale"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_former_leads_on_client_id"
-    t.index ["phase_id"], name: "index_former_leads_on_phase_id"
-    t.index ["project_id"], name: "index_former_leads_on_project_id"
-    t.index ["user_id"], name: "index_former_leads_on_user_id"
-  end
-
   create_table "phase_users", force: :cascade do |t|
     t.bigint "phase_id"
     t.bigint "user_id"
@@ -63,14 +47,39 @@ ActiveRecord::Schema.define(version: 2021_04_08_115708) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "project_leads", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "phase_id"
+    t.bigint "project_id"
+    t.bigint "client_id"
+    t.string "name"
+    t.string "platform"
+    t.integer "is_sale"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_project_leads_on_client_id"
+    t.index ["phase_id"], name: "index_project_leads_on_phase_id"
+    t.index ["project_id"], name: "index_project_leads_on_project_id"
+    t.index ["user_id"], name: "index_project_leads_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "role_users", force: :cascade do |t|
+    t.bigint "role_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_role_users_on_role_id"
+    t.index ["user_id"], name: "index_role_users_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 30
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -87,8 +96,8 @@ ActiveRecord::Schema.define(version: 2021_04_08_115708) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "former_leads", "clients"
-  add_foreign_key "former_leads", "phases"
-  add_foreign_key "former_leads", "projects"
-  add_foreign_key "former_leads", "users"
+  add_foreign_key "project_leads", "clients"
+  add_foreign_key "project_leads", "phases"
+  add_foreign_key "project_leads", "projects"
+  add_foreign_key "project_leads", "users"
 end
