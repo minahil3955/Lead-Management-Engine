@@ -1,4 +1,6 @@
-class FormerLead < ApplicationRecord
+class ProjectLead < ApplicationRecord
+  validates :name, :platform, presence: true
+  validates :name, :platform, length: { minimum: 3 }
   belongs_to :user
   belongs_to :phase
   belongs_to :project

@@ -1,3 +1,4 @@
 class Project < ApplicationRecord
-  has_many :former_leads
+  validates :name, presence: true, length: { minimum: 3 }
+  has_many :project_leads
 end

@@ -1,6 +1,6 @@
 class CreateFormerLeads < ActiveRecord::Migration[6.1]
   def change
-    create_table :former_leads do |t|
+    create_table :project_leads do |t|
       t.belongs_to :user, foreign_key: true
       t.belongs_to :phase, foreign_key: true
       t.belongs_to :project, foreign_key: true
