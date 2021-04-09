@@ -1,6 +1,6 @@
 class Phase < ApplicationRecord
   validates :due_date, :status, presence: true
-  validate due_date_cannot_be_in_the_past
+  validate :due_date_cannot_be_in_the_past
   has_and_belongs_to_many :users
   has_many :project_leads
   has_many :comments, as: :commentable
