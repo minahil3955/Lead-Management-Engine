@@ -32,6 +32,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'activeadmin'
 
 gem 'devise'
+gem 'pundit'
+gem 'activeadmin'
+
 
 gem 'pundit'
 
