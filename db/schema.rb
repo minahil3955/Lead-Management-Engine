@@ -95,19 +95,17 @@ ActiveRecord::Schema.define(version: 2021_04_09_091635) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "role_users", force: :cascade do |t|
-    t.bigint "role_id"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["role_id"], name: "index_role_users_on_role_id"
-    t.index ["user_id"], name: "index_role_users_on_user_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.bigint "role_id"
+    t.bigint "user_id"
+    t.index ["role_id"], name: "index_roles_users_on_role_id"
+    t.index ["user_id"], name: "index_roles_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
