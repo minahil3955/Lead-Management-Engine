@@ -35,6 +35,9 @@ gem 'devise'
 gem 'pundit'
 gem 'activeadmin'
 
+gem 'devise'
+
+gem 'pundit'
 
 gem 'pundit'
 

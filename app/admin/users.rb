@@ -1,6 +1,5 @@
 ActiveAdmin.register User do
   permit_params :email,
-                :name,
                 :password,
                 :encrypted_password,
                 :reset_password_token,
