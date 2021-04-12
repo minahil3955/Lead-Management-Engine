@@ -29,10 +29,11 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Devise gem
-gem 'devise'
-gem 'pundit'
 gem 'activeadmin'
 
+gem 'devise'
+
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

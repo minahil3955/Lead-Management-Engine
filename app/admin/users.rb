@@ -1,9 +1,14 @@
 ActiveAdmin.register User do
+  permit_params :email,
+                :password,
+                :encrypted_password,
+                :reset_password_token,
+                :reset_password_sent_at,
+                :remember_created_at,
+                roles_attributes: [:name]
   index do
     selectable_column
     column 'User Email', :email
-    column 'Password', :password
-    column 'Role/s', :name
     column 'Creation Deatils', :created_at
     column 'Updation Details', :updated_at
     actions defaults: true
@@ -12,28 +17,29 @@ ActiveAdmin.register User do
     panel 'User Details' do
       table_for user do
         column :email
-        column :password
-        column :created_at
-        column :updated_at
-        column :name
+        column 'Creation', :created_at
+        column 'Updation', :updated_at
+        table_for user.roles do
+          column 'Role', :name
+        end
       end
     end
     active_admin_comments
   end
 
-  controller do
-    def permitted_params
-      params.permit user: [:email, :password, :encrypted_password, :reset_password_token,
-      :reset_password_sent_at, :remember_created_at, roles_attributes: [:name]]
-    end
-  end
+  # controller do
+  #   # after_action  :send_credentails_email
+  #   def send_credentails_email
+  #     NewUserMailer.send_credentails_email(self).deliver
+  #   end
+  # end
 
   form do |f|
     f.semantic_errors
     f.inputs :email
     f.inputs :password
     f.has_many :roles do |r|
-      r.inputs :name
+      r.input :name, as: :select, collection: Role.names.keys
     end
     f.actions
   end
