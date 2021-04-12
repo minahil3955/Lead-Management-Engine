@@ -1,9 +1,8 @@
 class CreatePhaseUser < ActiveRecord::Migration[6.1]
   def change
-    create_table :phase_users do |t|
-      t.references :phase
-      t.references :user
-      t.timestamps
+    create_table :phases_users do |t|
+      t.belongs_to :phase
+      t.belongs_to :user
     end
   end
 end

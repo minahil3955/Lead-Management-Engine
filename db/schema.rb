@@ -56,21 +56,19 @@ ActiveRecord::Schema.define(version: 2021_04_09_091635) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "phase_users", force: :cascade do |t|
-    t.bigint "phase_id"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["phase_id"], name: "index_phase_users_on_phase_id"
-    t.index ["user_id"], name: "index_phase_users_on_user_id"
-  end
-
   create_table "phases", force: :cascade do |t|
     t.string "type"
     t.date "due_date"
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "phases_users", force: :cascade do |t|
+    t.bigint "phase_id"
+    t.bigint "user_id"
+    t.index ["phase_id"], name: "index_phases_users_on_phase_id"
+    t.index ["user_id"], name: "index_phases_users_on_user_id"
   end
 
   create_table "project_leads", force: :cascade do |t|
