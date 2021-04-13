@@ -118,10 +118,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_072922) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "authentication_token"
-<<<<<<< HEAD
     t.string "name"
-=======
->>>>>>> Reconfirmable Mailer implemented
     t.index ["authentication_token"], name: "index_users_on_authentication_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
