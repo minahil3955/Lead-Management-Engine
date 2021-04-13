@@ -1,5 +1,13 @@
-<p>Welcome <%= @email %>!</p>
-
-<p>You can confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>Welcome, <%= @email %>!</p>
+<p><b>Congratulation</b> you've assigned new role(s) by Super Admin</p>
+<br>
+<p>Following are your roles : </p><ul>
+<% @resource.roles.each do |r| %>
+  <li><%= r.name %></li>
+<% end %>
+</ul>
+<p>Please login via following credentials at the below link:</p>
+<p>Email :<b><%= @email %></b></p>
+<p>Passowrd :<b><%= @resource.password %></b></p>
+<br>
+<p><%= link_to 'Login to my Account !', confirmation_url(@resource, confirmation_token: @token) %></p>
