@@ -1,5 +1,5 @@
 ActiveAdmin.register Phase do
-  permit_params :type, :due_date, :status, :phase_status
+  permit_params :due_date, :status, :name
   form do |f|
     f.semantic_errors
     f.inputs :name
