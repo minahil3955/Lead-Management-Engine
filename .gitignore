@@ -2,3 +2,4 @@
 /log
 /node_modules
 .byebug_history
+.vscode/settings.json
