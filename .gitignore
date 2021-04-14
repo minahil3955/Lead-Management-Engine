@@ -1,3 +1,5 @@
-/tmp/*
-/log/*
-/node_modules/*
+/tmp
+/log
+/node_modules
+.byebug_history
+.vscode/settings.json
