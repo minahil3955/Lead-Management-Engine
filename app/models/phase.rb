@@ -2,7 +2,7 @@ class Phase < ApplicationRecord
   validates :due_date, :status, :name, presence: true
   validate :due_date_in_future
   has_and_belongs_to_many :users
-  has_many :project_leads
+  belongs_to :project_lead
   has_many :comments, as: :commentable
   enum status: %i[active inactive], _default: :active
 
