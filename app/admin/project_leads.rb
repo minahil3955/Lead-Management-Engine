@@ -1,5 +1,6 @@
 ActiveAdmin.register ProjectLead do
   permit_params :user_id, :client_id, :name, :platform, :is_sale
+
   form do |f|
     f.semantic_errors
     f.inputs :name

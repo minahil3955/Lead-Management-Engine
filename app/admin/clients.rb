@@ -1,5 +1,6 @@
 ActiveAdmin.register Client do
   permit_params :name, :address, :email, :contact, project_leads_attributes: [:name]
+
   index do
     selectable_column
     column 'Name', :name
