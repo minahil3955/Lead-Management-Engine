@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project_lead.user_id %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @project_lead.client_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project_lead.name %>
+</p>
+
+<p>
+  <strong>Platform:</strong>
+  <%= @project_lead.platform %>
+</p>
+
+<p>
+  <strong>Is sale:</strong>
+  <%= @project_lead.is_sale %>
+</p>
+
+<p>
+  <strong>Created Date</strong>
+  <%= @project_lead.created_at %>
+</p>
+
+<p>
+  <strong>Updatation Date</strong>
+  <%= @project_lead.updated_at %>
+</p>
+
+<%= link_to 'Edit', edit_project_lead_path(@project_lead) %> |
+<%= link_to 'Back', project_leads_path %>
+<%= link_to 'Create New Comment', new_comment_path %>
+

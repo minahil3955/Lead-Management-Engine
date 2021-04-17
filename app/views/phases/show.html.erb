@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @phase.name %>
+</p>
+
+<p>
+  <strong>Due date:</strong>
+  <%= @phase.due_date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @phase.status %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @phase.created_at %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @phase.updated_at %>
+</p>
+
+<p>
+  <strong>Project lead:</strong>
+  <%= @phase.project_lead_id %>
+</p>
+
+<%= link_to 'Edit', edit_phase_path(@phase) %> |
+<%= link_to 'Back', phases_path %>
+<%= link_to 'Create New Comment', new_comment_path %>

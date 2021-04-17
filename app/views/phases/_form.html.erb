@@ -1,0 +1,37 @@
+<%= form_with(model: phase) do |form| %>
+  <% if phase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(phase.errors.count, "error") %> prohibited this phase from being saved:</h2>
+
+      <ul>
+        <% phase.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :due_date %>
+    <%= form.date_field :due_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= select_tag :status, options_for_select(Phase.statuses) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_lead_id %>
+    <%= form.collection_select(:project_lead_id, ProjectLead.all, :id, :name, { :prompt => 'Lead', :selected => @phase.project_lead_id }, { class: '' })%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

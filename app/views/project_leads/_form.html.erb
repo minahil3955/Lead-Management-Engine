@@ -1,0 +1,44 @@
+<%= form_with(model: project_lead) do |form| %>
+  <% if project_lead.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project_lead.errors.count, "error") %> prohibited this project_lead from being saved:</h2>
+
+      <ul>
+        <% project_lead.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.collection_select(:user_id, User.all, :id, :name, { :prompt => 'Select Assignee', :selected => @project_lead.user_id }, { class: '' })%>
+  </div>
+
+  <div class="field">
+    <%= form.label :client %>
+    <%= form.collection_select(:client_id, Client.all, :id, :name, { :multiple => true }, { :prompt => 'Select Old Client', :selected => @project_lead.client_id })%>
+    or <%= link_to "Create New Client",  new_client_path %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :platform %>
+    <%= form.text_field :platform %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_sale %>
+    <%= form.text_field :is_sale %>
+  </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
