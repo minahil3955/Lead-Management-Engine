@@ -37,5 +37,12 @@
 
 <%= link_to 'Edit', edit_project_lead_path(@project_lead) %> |
 <%= link_to 'Back', project_leads_path %>
+<br>
+<h3>Comments</h3>
+<% @project_lead.comments.each do |c| %>
+  <div class='well'>
+    <%= comment.body %>
+  </div>
+<% end %>
 <%= link_to 'Create New Comment', new_comment_path %>
 
