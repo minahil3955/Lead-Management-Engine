@@ -1,6 +1,6 @@
 <div class = 'mx-3 my-3'>
   <p>
-    <strong>Name:</strong>
+    <strong>Phase Name:</strong>
     <%= @phase.name %>
   </p>
 
@@ -10,23 +10,22 @@
   </p>
 
   <p>
-    <strong>Status:</strong>
+    <strong>Current Status:</strong>
     <%= @phase.status %>
   </p>
 
   <p>
-    <strong>Created at:</strong>
+    <strong>Creation:</strong>
     <%= @phase.created_at %>
-  </p>
-
-  <p>
-    <strong>Updated at:</strong>
-    <%= @phase.updated_at %>
   </p>
 
   <%= link_to 'Edit', edit_phase_path(@phase) %> |
   <%= link_to 'Back', phases_path %> |
-  <%= link_to 'Add Comment', new_comment_path %>
+
+
+  <%= render partial: 'comments/comments', locals: {commentable: @phase}%>
+  <%= render partial: 'comments/form', locals: {commentable: @phase}%>
+
 
 </div>
 

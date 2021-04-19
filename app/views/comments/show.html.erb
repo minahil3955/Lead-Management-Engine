@@ -2,23 +2,19 @@
 
 <p>
   <strong>Commenter:</strong>
-  <%= @comment.commentable %>
+  <%= @comment.commentable.name %>
 </p>
 
 <p>
-  <strong>Body:</strong>
+  <strong>Comment Context:</strong>
   <%= @comment.body %>
 </p>
 
 <p>
-  <strong>Created at:</strong>
+  <strong>Creation:</strong>
   <%= @comment.created_at %>
 </p>
 
-<p>
-  <strong>Updated at:</strong>
-  <%= @comment.updated_at %>
-</p>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>

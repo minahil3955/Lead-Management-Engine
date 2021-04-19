@@ -20,12 +20,12 @@
       <div class="form-group">
         <p><b><%= form.label :platform %></b></p>
         <%= form.text_field :platform %>
-      </div>
 
-      <div class="form-group">
-        <p><b><%= form.label 'Sale Status' %></b></p>
-        <%= form.text_field :is_sale %>
       </div>
+       <div class = 'form-group '>
+      <%= form.label 'Sale Status'%>
+      <%= select_tag :is_sale, options_for_select(ProjectLead.is_sales), { :prompt => 'Choose Sale Status', :selected => @project_lead.is_sale} %>
+    </div>
 
       <div class="form-group">
         <p><b><%= form.label :Assignee %></b></p>
