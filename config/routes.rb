@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :comments
   resources :phases
   resources :clients
-  resources :project_leads
+  resources :project_leads do
+    resources :comments, module: :project_leads
+  end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

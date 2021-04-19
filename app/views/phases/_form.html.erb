@@ -10,28 +10,34 @@
       </ul>
     </div>
   <% end %>
+  <div class = 'row'>
+    <div class = 'col-md-8 offset-md-3'>
+       <div class = 'form-group'>
+      <p><%= form.label :name %></p>
+      <%= form.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <div class = 'form-group'>
+      <p><%= form.label :due_date %></p>
+      <%= form.date_field :due_date %>
+    </div>
+
+    <div class = 'form-group '>
+      <%= form.label :status %>
+      <%= select_tag :status, options_for_select(Phase.statuses), { :prompt => 'Choose Project Status', :selected => @phase.status } %>
+    </div>
+
+    <div class = 'form-group'>
+      <%= form.label :project_lead_id %>
+      <%= form.collection_select(:project_lead_id, ProjectLead.all, :id, :name, { :prompt => 'Choose Lead', :selected => @phase.project_lead_id }, { class: '' })%>
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-md-8 offset-md-3'>
+        <button action = 'submit'  class='btn btn-dark px-3 py-2'> Create Phase </button>
+      </div>
+    </div>
+   </div>
   </div>
 
-  <div class="field">
-    <%= form.label :due_date %>
-    <%= form.date_field :due_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= select_tag :status, options_for_select(Phase.statuses) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :project_lead_id %>
-    <%= form.collection_select(:project_lead_id, ProjectLead.all, :id, :name, { :prompt => 'Lead', :selected => @phase.project_lead_id }, { class: '' })%>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

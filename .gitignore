@@ -1,5 +1,6 @@
 /tmp
 /log
 /node_modules
+/public/packs/js
 .byebug_history
 .vscode/settings.json

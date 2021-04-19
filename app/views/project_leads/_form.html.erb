@@ -10,35 +10,40 @@
       </ul>
     </div>
   <% end %>
+  <div class = 'row py-4'>
+    <div class="col-md-8 offset-md-3">
+      <div class="form-group">
+        <p><b><%= form.label :name %></b><p>
+        <%= form.text_field :name %>
+      </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.collection_select(:user_id, User.all, :id, :name, { :prompt => 'Select Assignee', :selected => @project_lead.user_id }, { class: '' })%>
-  </div>
+      <div class="form-group">
+        <p><b><%= form.label :platform %></b></p>
+        <%= form.text_field :platform %>
+      </div>
 
-  <div class="field">
-    <%= form.label :client %>
-    <%= form.collection_select(:client_id, Client.all, :id, :name, { :multiple => true }, { :prompt => 'Select Old Client', :selected => @project_lead.client_id })%>
-    or <%= link_to "Create New Client",  new_client_path %>
-  </div>
+      <div class="form-group">
+        <p><b><%= form.label 'Sale Status' %></b></p>
+        <%= form.text_field :is_sale %>
+      </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+      <div class="form-group">
+        <p><b><%= form.label :Assignee %></b></p>
+        <%= form.collection_select(:user_id, User.all, :id, :name, { :prompt => 'Select Assignee', :selected => @project_lead.user_id }, { class: '' })%>
+      </div>
 
-  <div class="field">
-    <%= form.label :platform %>
-    <%= form.text_field :platform %>
-  </div>
+      <div class="form-group">
+        <p><b><%= form.label :client %></b></p>
+        <%= form.collection_select(:client_id, Client.all, :id, :name, { :multiple => true }, { :prompt => 'Select Old Client', :selected => @project_lead.client_id })%>
+        or <%= link_to "Create New Client",  new_client_path %>
+      </div>
 
-  <div class="field">
-    <%= form.label :is_sale %>
-    <%= form.text_field :is_sale %>
+        <div class = 'row'>
+          <div class = 'col-md-8 offset-md-3'>
+            <button action = 'submit'  class='btn btn-dark px-3 py-2'> Create Lead </button>
+          </div>
+      </div>
+    </div>
   </div>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
 <% end %>

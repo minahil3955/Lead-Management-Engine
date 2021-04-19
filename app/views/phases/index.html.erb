@@ -1,9 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%= stylesheet_link_tag "application" %>
+<h3 class="bg-secondary text-white text-center py-2">Current Phases</h3>
 
-<h1>Phases</h1>
-
-<table>
-  <thead>
+<table class="table table-striped my-5">
+  <thead class="thead-dark">
     <tr>
       <th>Name</th>
       <th>Due date</th>
@@ -23,7 +22,7 @@
         <td><%= phase.status %></td>
         <td><%= phase.created_at %></td>
         <td><%= phase.updated_at %></td>
-        <td><%= phase.project_lead_id %></td>
+        <td><%= phase.project_lead.name %></td>
         <td><%= link_to 'Show', phase %></td>
         <td><%= link_to 'Edit', edit_phase_path(phase) %></td>
         <td><%= link_to 'Destroy', phase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,7 +30,9 @@
     <% end %>
   </tbody>
 </table>
+<div class = 'row'>
+  <div class = 'col-md-8 offset-md-5'>
+    <button  class="btn btn-dark mx-5"><%= link_to 'Add New Phase', new_phase_path %></button>
+  </div>
+<div>
 
-<br>
-
-<%= link_to 'New Phase', new_phase_path %>
