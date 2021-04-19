@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   end
 
   get 'projects', to: 'project_leads#project_index', as: 'projects_index'
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

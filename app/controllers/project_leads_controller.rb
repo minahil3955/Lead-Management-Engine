@@ -12,7 +12,6 @@ class ProjectLeadsController < ApplicationController
 
   def new
     @project_lead = current_user.project_leads.new
-    # authorize @project_lead
   end
 
   def edit
@@ -24,7 +23,7 @@ class ProjectLeadsController < ApplicationController
 
     respond_to do |format|
       if @project_lead.save
-        format.html { redirect_to @project_lead, notice: 'Project lead was successfully created.' }
+        format.html { redirect_to @project_lead, notice: 'Lead successfully created.' }
         format.json { render :show, status: :created, location: @project_lead }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag "application" %>
 <h3 class="bg-secondary text-white text-center py-2">Current Client</h3>
-
 <table class="table table-striped my-5">
   <thead class="thead-dark">
     <tr>
@@ -11,7 +10,6 @@
       <th scope="col" colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @clients.each do |client| %>
       <tr>
@@ -19,14 +17,12 @@
         <td><%= client.address %></td>
         <td><%= client.email %></td>
         <td><%= client.contact %></td>
-        <td class = 'a'><%= link_to 'Show', client %></td>
         <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
 <div class = 'row'>
   <div class = 'col-md-8 offset-md-5'>

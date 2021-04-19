@@ -1,6 +1,12 @@
-<h3>Comments</h3>
+<hr>
+<h4><b>Comments<br></h4>
 <% commentable.comments.each do |c| %>
-  <div class='well'>
-    <ul><li><%= c.body %></li><ul>
+  <div>
+    <ul>
+      <li>
+        <%= c.body %>
+        <hr>
+      </li>
+    <ul>
   </div>
 <% end %>

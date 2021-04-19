@@ -1,4 +1,4 @@
-<div class = 'mx-3 my-3'>
+<div class = 'mx-3 my-2'>
   <p>
     <strong>Phase Name:</strong>
     <%= @phase.name %>
@@ -16,16 +16,11 @@
 
   <p>
     <strong>Creation:</strong>
-    <%= @phase.created_at %>
+    <td><%= @phase.created_at.year.to_s + '-' + @phase.created_at.month.to_s + '-' + @phase.created_at.day.to_s %></td>
   </p>
-
-  <%= link_to 'Edit', edit_phase_path(@phase) %> |
-  <%= link_to 'Back', phases_path %> |
-
 
   <%= render partial: 'comments/comments', locals: {commentable: @phase}%>
   <%= render partial: 'comments/form', locals: {commentable: @phase}%>
-
 
 </div>
 

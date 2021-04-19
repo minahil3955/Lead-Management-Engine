@@ -8,8 +8,7 @@
       <th>Due date</th>
       <th>Status</th>
       <th>Created at</th>
-      <th>Updated at</th>
-      <th>Project lead</th>
+      <th>Project Lead</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,12 +19,11 @@
         <td><%= phase.name %></td>
         <td><%= phase.due_date %></td>
         <td><%= phase.status %></td>
-        <td><%= phase.created_at %></td>
-        <td><%= phase.updated_at %></td>
-        <td><%= phase.project_lead.name %></td>
+        <td><%=  phase.created_at.year.to_s + '-' + phase.created_at.month.to_s + '-' + phase.created_at.day.to_s %></td>
+        <td><%= link_to phase.project_lead.name, project_lead_path(phase.project_lead_id) %></td>
         <td><%= link_to 'Show', phase %></td>
         <td><%= link_to 'Edit', edit_phase_path(phase) %></td>
-        <td><%= link_to 'Destroy', phase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mark Complete', phase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

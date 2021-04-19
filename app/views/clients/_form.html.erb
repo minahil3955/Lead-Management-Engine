@@ -2,7 +2,7 @@
   <%= form_with(model: client) do |form| %>
     <% if client.errors.any? %>
       <div id="error_explanation">
-        <h3><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h>
+        <h5><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h5>
         <ul>
           <% client.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -31,14 +31,13 @@
           <p><%= form.label :contact %></p>
           <%= form.text_field :contact %>
         </div>
+
         <div class = 'row'>
           <div class = 'col-md-8 offset-md-3'>
             <button action = 'submit'  class='btn btn-dark'> Create Client </button>
           </div>
         </div>
-
       <% end %>
       </div>
     </div>
-
 </div>

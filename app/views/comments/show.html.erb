@@ -1,3 +1,4 @@
+<div class = 'mx-3 my-2'>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -11,10 +12,7 @@
 </p>
 
 <p>
-  <strong>Creation:</strong>
-  <%= @comment.created_at %>
+  <strong>Creation Date:</strong>
+  <td><%=  @comment.created_at.year.to_s + '/' + @comment.created_at.month.to_s + '/' + @comment.created_at.day.to_s %></td>
 </p>
-
-
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<div>

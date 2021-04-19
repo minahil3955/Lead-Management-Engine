@@ -1,3 +1,4 @@
+<div class = 'my-2 mx-3'>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -21,13 +22,13 @@
 </p>
 
 <p>
-  <strong>Is sale:</strong>
+  <strong>Sale Status:</strong>
   <%= @project_lead.is_sale %>
 </p>
 
 <p>
   <strong>Created Date</strong>
-  <%= @project_lead.created_at %>
+  <td><%= @project_lead.created_at.year.to_s + '-' + @project_lead.created_at.month.to_s + '-' + @project_lead.created_at.day.to_s %></td>
 </p>
 
 <p>
@@ -40,5 +41,4 @@
 <br>
 <%= render partial: 'comments/comments', locals: {commentable: @project_lead}%>
 <%= render partial: 'comments/form', locals: {commentable: @project_lead}%>
-<%= link_to 'Create New Comment', new_comment_path %>
-
+</div>

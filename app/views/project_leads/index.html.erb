@@ -1,15 +1,15 @@
 <%= stylesheet_link_tag "application" %>
 <h3 class="bg-secondary text-white text-center py-2">Current Leads</h3>
+
 <table class="table table-striped my-5">
   <thead class="thead-dark">
     <tr>
-      <th>Name</th>
+      <th>Lead Name</th>
       <th>Platform</th>
       <th>Sale Status</th>
       <th>Assignee</th>
       <th>Client</th>
-      <th>Creation</th>
-      <th>Updation</th>
+      <th>Creation Date</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -22,12 +22,11 @@
         <td><%= project_lead.platform %></td>
         <td><%= project_lead.is_sale %></td>
         <td><%= project_lead.user.name %></td>
-        <td><%= project_lead.client.name %></td>
-        <td><%= project_lead.created_at %></td>
-        <td><%= project_lead.updated_at %></td>
+        <td><%= link_to project_lead.client.name, client_path(project_lead.client_id) %></td>
+        <td><%= project_lead.created_at.year.to_s + '-' + project_lead.created_at.month.to_s + '-' + project_lead.created_at.day.to_s %></td>
         <td><%= link_to 'Show', project_lead %></td>
         <td><%= link_to 'Edit', edit_project_lead_path(project_lead) %></td>
-        <td><%= link_to 'Destroy', project_lead, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', project_lead, method: :delete, data: { confirm: 'Are you sure ?' } %></td>
       </tr>
     <% end %>
   </tbody>
