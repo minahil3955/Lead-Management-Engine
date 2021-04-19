@@ -3,7 +3,7 @@ class ProjectLeadsController < ApplicationController
   before_action :set_project_lead, only: %i[show edit update destroy]
 
   def index
-    @project_leads = ProjectLead.all
+    @project_leads = ProjectLead.open
   end
 
   def show
@@ -11,7 +11,8 @@ class ProjectLeadsController < ApplicationController
   end
 
   def new
-    @project_lead = ProjectLead.new
+    @project_lead = current_user.project_leads.new
+    # authorize @project_lead
   end
 
   def edit
@@ -19,7 +20,7 @@ class ProjectLeadsController < ApplicationController
   end
 
   def create
-    @project_lead = ProjectLead.new(project_lead_params)
+    @project_lead = current_user.project_leads.new(project_lead_params)
 
     respond_to do |format|
       if @project_lead.save
@@ -35,7 +36,7 @@ class ProjectLeadsController < ApplicationController
   def update
     respond_to do |format|
       if @project_lead.update(project_lead_params)
-        format.html { redirect_to @project_lead, notice: 'Project lead was successfully updated.' }
+        format.html { redirect_to @project_lead, notice: 'Lead updated.' }
         format.json { render :show, status: :ok, location: @project_lead }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,9 +48,14 @@ class ProjectLeadsController < ApplicationController
   def destroy
     @project_lead.destroy
     respond_to do |format|
-      format.html { redirect_to project_leads_url, notice: 'Project lead was successfully destroyed.' }
+      format.html { redirect_to project_leads_url, notice: 'Lead destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def project_index
+    @project_leads = ProjectLead.close
+    render :project
   end
 
   private

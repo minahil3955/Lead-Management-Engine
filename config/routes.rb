@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   resources :comments
   resources :phases
   resources :clients
+  get 'projects', to: 'project_leads#project_index', as: 'projects_index'
   resources :project_leads do
-    resources :comments, module: :project_leads
+    resources :comments, only: %i[create destroy]
+    resources :phases do
+      resources :comments, only: %i[create destroy]
+    end
   end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
