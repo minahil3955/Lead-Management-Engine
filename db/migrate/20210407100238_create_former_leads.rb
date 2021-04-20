@@ -3,8 +3,6 @@ class CreateFormerLeads < ActiveRecord::Migration[6.1]
     create_table :project_leads do |t|
       t.belongs_to :user, foreign_key: true
       t.belongs_to :phase, foreign_key: true
-      t.belongs_to :project, foreign_key: true
-      t.belongs_to :client, foreign_key: true
       t.string :lead_name
       t.string :platform
       t.date :joining_date
