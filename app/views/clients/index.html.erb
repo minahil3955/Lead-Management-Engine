@@ -1,0 +1,32 @@
+<%= stylesheet_link_tag "application" %>
+<h3 class="bg-secondary text-white text-center py-2">Current Client</h3>
+
+<table class="table table-striped my-5">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Email</th>
+      <th scope="col">Contact</th>
+      <th scope="col" colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.name %></td>
+        <td><%= client.address %></td>
+        <td><%= client.email %></td>
+        <td><%= client.contact %></td>
+        <td><%= link_to 'Edit', edit_client_path(client) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<div class = 'row'>
+  <div class = 'col-md-8 offset-md-5'>
+    <button  class="btn btn-dark mx-5"><%= link_to 'Create New Client', new_client_path %></button>
+  </div>
+<div>

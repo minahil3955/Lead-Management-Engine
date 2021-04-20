@@ -7,7 +7,7 @@ one:
   contact: MyString
   platform: MyString
   joining_date: 2021-04-07
-  is_sale: false
+  sale_status: false
 
 two:
   name: MyString
@@ -16,4 +16,4 @@ two:
   contact: MyString
   platform: MyString
   joining_date: 2021-04-07
-  is_sale: false
+  sale_status: false

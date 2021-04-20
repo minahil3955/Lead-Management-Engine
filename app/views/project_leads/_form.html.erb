@@ -1,0 +1,45 @@
+<%= form_with(model: project_lead) do |form| %>
+  <% if project_lead.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project_lead.errors.count, "error") %> prohibited this project_lead from being saved:</h2>
+
+      <ul>
+        <% project_lead.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class = 'row py-4'>
+    <div class="col-md-8 offset-md-3">
+      <div class="form-group">
+        <p><b><%= form.label :name %></b><p>
+        <%= form.text_field :name %>
+      </div>
+
+      <div class="form-group">
+        <p><b><%= form.label :platform %></b></p>
+        <%= form.text_field :platform %>
+      </div>
+
+      <div class='form-group '>
+        <%= form.label 'Sale Status'%>
+        <%= form.select(:sale_status, ProjectLead.sale_statuses.keys.map {|sale| [sale.titleize,sale]}) %>
+    </div>
+
+      <div class="form-group">
+        <p><b><%= form.label :client %></b></p>
+        <%= form.collection_select(:client_id, Client.all, :id, :name, { :multiple => true }, { :prompt => 'Select Old Client', :selected => @project_lead.client_id })%>
+        or <%= link_to "Create New Client",  new_client_path %>
+      </div>
+        <%# <%if current_user.business_developer? %>
+        <div class='row'>
+          <div class='col-md-8 offset-md-3'>
+            <button action = 'submit'  class='btn btn-dark px-3 py-2'> Create Lead </button>
+          </div>
+      </div>
+      <%# <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

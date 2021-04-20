@@ -1,0 +1,27 @@
+<div class = 'mx-3 my-2'>
+  <p>
+    <strong>Phase Name:</strong>
+    <%= @phase.name %>
+  </p>
+  <p>
+    <strong>Due date:</strong>
+    <%= @phase.due_date %>
+  </p>
+
+  <p>
+    <strong>Current Status:</strong>
+    <%= @phase.status %>
+  </p>
+
+  <p>
+    <strong>Creation:</strong>
+    <td><%= @phase.created_at.to_date %></td>
+  </p>
+
+<h4>
+  <b>Comments<b>
+</h4>
+ <%= render partial: 'comments/comments', collection: @phase.comments, as: :comment, locals: {project_lead: @phase.project_lead} %>
+ <%= render partial: 'comments/phase_form', locals: {commentable: project_lead_phase_path(@project_lead, @phase)}%>
+</div>
+

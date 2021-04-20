@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_101850) do
+ActiveRecord::Schema.define(version: 2021_04_20_165159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 2021_04_15_101850) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
   create_table "phases", force: :cascade do |t|
@@ -63,7 +66,9 @@ ActiveRecord::Schema.define(version: 2021_04_15_101850) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "project_lead_id"
+    t.bigint "user_id"
     t.index ["project_lead_id"], name: "index_phases_on_project_lead_id"
+    t.index ["user_id"], name: "index_phases_on_user_id"
   end
 
   create_table "phases_users", force: :cascade do |t|
@@ -78,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_04_15_101850) do
     t.bigint "client_id"
     t.string "name"
     t.string "platform"
-    t.integer "is_sale"
+    t.integer "sale_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_project_leads_on_client_id"

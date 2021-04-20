@@ -1,0 +1,18 @@
+<div class = 'mx-3 my-2'>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Commenter:</strong>
+  <%= @comment.commentable.name %>
+</p>
+
+<p>
+  <strong>Comment Context:</strong>
+  <%= @comment.body %>
+</p>
+
+<p>
+  <strong>Creation Date:</strong>
+  <td><%=  @comment.created_at.to_date %></td>
+</p>
+<div>
