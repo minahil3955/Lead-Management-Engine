@@ -22,9 +22,9 @@
         <%= form.text_field :platform %>
       </div>
 
-      <div class = 'form-group '>
+      <div class='form-group '>
         <%= form.label 'Sale Status'%>
-        <%= form.select(:is_sale, ProjectLead.is_sales.keys.map {|sale| [sale.titleize,sale]}) %>
+        <%= form.select(:sale_status, ProjectLead.sale_statuses.keys.map {|sale| [sale.titleize,sale]}) %>
     </div>
 
       <div class="form-group">
@@ -33,8 +33,8 @@
         or <%= link_to "Create New Client",  new_client_path %>
       </div>
         <%# <%if current_user.business_developer? %>
-        <div class = 'row'>
-          <div class = 'col-md-8 offset-md-3'>
+        <div class='row'>
+          <div class='col-md-8 offset-md-3'>
             <button action = 'submit'  class='btn btn-dark px-3 py-2'> Create Lead </button>
           </div>
       </div>

@@ -3,7 +3,6 @@ class PhasesController < ApplicationController
   before_action :set_project_lead
 
   def index
-    puts @project_lead
     @phases = @project_lead.phases
   end
 

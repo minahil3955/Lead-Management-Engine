@@ -57,6 +57,6 @@ class ProjectLeadsController < ApplicationController
   end
 
   def project_lead_params
-    params.require(:project_lead).permit(:user_id, :client_id, :name, :platform, :is_sale, :created_at, :updated_at)
+    params.require(:project_lead).permit(:user_id, :client_id, :name, :platform, :sale_status, :created_at, :updated_at)
   end
 end
