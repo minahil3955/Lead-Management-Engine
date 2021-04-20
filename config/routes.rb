@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :clients
+  resources :clients, except: [:destroy]
   resources :project_leads do
     resources :comments, module: :project_leads
     resources :phases do
