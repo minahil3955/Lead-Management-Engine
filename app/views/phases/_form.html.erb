@@ -1,4 +1,4 @@
-<%= form_with(model: phase) do |form| %>
+<%= form_with model: [@phase.project_lead, @phase] do |form| %>
   <% if phase.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(phase.errors.count, "error") %> prohibited this phase from being saved:</h2>
@@ -13,13 +13,13 @@
   <div class = 'row'>
     <div class = 'col-md-8 offset-md-3'>
        <div class = 'form-group'>
-      <p><%= form.label :name %></p>
-      <%= form.text_field :name %>
+        <p><%= form.label :name %></p>
+        <%= form.text_field :name %>
     </div>
 
      <div class = 'form-group'>
-      <p><%= form.label :user_id %></p>
-       <%= form.collection_select(:user_id, User.all, :id, :name, { prompt: 'Choose Assignee', :selected => @phase.user_id })%>
+        <p><%= form.label :user_id %></p>
+        <%= form.collection_select(:user_id, User.all, :id, :name, { prompt: 'Choose Assignee', :selected => @phase.user_id })%>
     </div>
 
     <div class = 'form-group'>
@@ -29,12 +29,7 @@
 
     <div class = 'form-group '>
       <%= form.label :status %>
-      <%= select_tag :status, options_for_select(Phase.statuses), { prompt: 'Choose Project Status', :selected => @phase.status } %>
-    </div>
-
-    <div class = 'form-group'>
-      <%= form.label :project_lead_id %>
-      <%= form.collection_select(:project_lead_id, ProjectLead.all, :id, :name, { prompt: 'Choose Lead', :selected => @phase.project_lead_id })%>
+      <%= form.select(:status, Phase.statuses.keys.map {|status| [status.titleize,status]}) %>
     </div>
 
     <div class = 'row'>

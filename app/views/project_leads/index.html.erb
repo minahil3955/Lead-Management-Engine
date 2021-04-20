@@ -6,8 +6,6 @@
     <tr>
       <th>Lead Name</th>
       <th>Platform</th>
-      <th>Sale Status</th>
-      <th>Assignee</th>
       <th>Client</th>
       <th>Creation Date</th>
       <th colspan="4"></th>
@@ -17,11 +15,8 @@
   <tbody>
     <% @project_leads.each do |project_lead| %>
       <tr>
-
         <td><%= project_lead.name %></td>
         <td><%= project_lead.platform %></td>
-        <td><%= project_lead.is_sale %></td>
-        <td><%= project_lead.user.name %></td>
         <td><%= link_to project_lead.client.name, client_path(project_lead.client_id) %></td>
         <td><%= project_lead.created_at.to_date %></td>
         <td><%= link_to 'Show', project_lead %></td>
@@ -37,6 +32,5 @@
     <%# <%if current_user.roles.include?('Business_Developer') %>
       <button  class="btn btn-dark"><%= link_to 'Create New Lead', new_project_lead_path %></button>
     <%# <% end %>
-    <button  class="btn btn-dark"><%= link_to 'Add Phase to Lead', new_phase_path %></button>
   </div>
 <div>

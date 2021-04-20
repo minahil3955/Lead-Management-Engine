@@ -6,18 +6,14 @@ class ProjectLeadsController < ApplicationController
     @project_leads = ProjectLead.open
   end
 
-  def show
-    # ..
-  end
+  def show; end
 
   def new
     @project_lead = current_user.project_leads.new
     # authorize @project_lead
   end
 
-  def edit
-    # ..
-  end
+  def edit; end
 
   def create
     # authorize @project_lead
@@ -54,7 +50,6 @@ class ProjectLeadsController < ApplicationController
     end
   end
 
-
   private
 
   def set_project_lead
@@ -64,5 +59,4 @@ class ProjectLeadsController < ApplicationController
   def project_lead_params
     params.require(:project_lead).permit(:user_id, :client_id, :name, :platform, :is_sale, :created_at, :updated_at)
   end
-
 end

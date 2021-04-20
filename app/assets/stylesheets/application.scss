@@ -13,21 +13,23 @@
  *= require_tree .
  *= require_self
  */
-a, a:link, a:visited
-{
+a, a:link, a:visited {
   text-decoration: none;
   color: grey;
-
 }
+
 a:hover {
   color: black;
 }
+
 body {
   font-size: 90%;
 }
+
 button a:link, button a:visited, button a:hover {
   color:white;
 }
+
 button {
   background-color:black;
 }

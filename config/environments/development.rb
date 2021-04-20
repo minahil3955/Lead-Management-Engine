@@ -80,7 +80,7 @@ Rails.application.configure do
     port:                 587,
     domain:               'devsinc.com',
     user_name:            'minahil.mustafa@devsinc.com',
-    password:             'minahil3955',app/views/project_leads/_form.html.erb
+    password:             'minahil3955',
     authentication:       'plain',
     enable_starttls_auto: true }
 end

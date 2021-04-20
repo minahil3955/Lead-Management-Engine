@@ -6,5 +6,5 @@ class ProjectLead < ApplicationRecord
   belongs_to :client
   has_many :phases
   has_many :comments, as: :commentable
-  enum is_sale: %i[open close], _default: :open
+  enum is_sale: %i[open close]
 end

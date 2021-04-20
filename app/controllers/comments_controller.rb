@@ -17,8 +17,12 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new comment_params
     @comment.body = current_user.name + ': '  + @comment.body
     @comment.save
+    if @commentable.instance_of?(Phase)
+      return redirect_to [@commentable.project_lead, @commentable],
+                         notice: 'Comment Posted successfully.'
     redirect_to @commentable, notice: 'Comment Posted Sucessfully !'
   end
+end
 
   def destroy
     @comment.destroy

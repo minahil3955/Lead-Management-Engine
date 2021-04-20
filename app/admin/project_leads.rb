@@ -10,4 +10,18 @@ ActiveAdmin.register ProjectLead do
     f.inputs :is_sale
     f.actions
   end
+
+  show do
+    panel 'Lead Details' do
+      table_for project_lead do
+        column :name
+        column :email
+        column :platform
+        column :user
+        column 'Creation', :created_at
+        column 'Updation', :updated_at
+      end
+    end
+    active_admin_comments
+  end
 end

@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  resources :phases
   resources :comments
   resources :clients
   resources :project_leads do
     resources :comments, module: :project_leads
+    resources :phases do
+      resources :comments, module: :phases
+    end
   end
-  resources :phases do
-    resources :comments, module: :phases
-  end
+
   resources :projects, only: [:index]
 
   devise_for :admin_users, ActiveAdmin::Devise.config

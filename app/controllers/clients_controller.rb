@@ -5,17 +5,13 @@ class ClientsController < ApplicationController
     @clients = Client.all
   end
 
-  def show
-    # ..
-  end
+  def show; end
 
   def new
     @client = Client.new
   end
 
-  def edit
-    # ..
-  end
+  def edit; end
 
   def create
     @client = Client.new(client_params)

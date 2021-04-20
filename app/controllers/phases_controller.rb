@@ -1,42 +1,31 @@
 class PhasesController < ApplicationController
   before_action :set_phase, only: %i[show edit update destroy]
-  before_action :load_user, only: %i[create]
+  before_action :set_project_lead
 
   def index
-    @phases = Phase.all
+    puts @project_lead
+    @phases = @project_lead.phases
   end
 
-  def show
-    @role = Role.Engineer
-  end
+  def show; end
 
   def new
-    @phase = Phase.new
+    @phase = @project_lead.phases.new
   end
 
-  def edit
-    # ..
-  end
+  def edit; end
 
   def create
-    @phase = Phase.new(phase_params)
-    respond_to do |format|
-      if @phase.save
-        AssigneeMailer.with(user: @user, phase: @phase).assignment_email.deliver_now
-        format.html { redirect_to @phase, notice: 'Phase Created Sucessfully !' }
-        format.json { render :show, status: :created, location: @phase }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @phase.errors, status: :unprocessable_entity }
-      end
-    end
+    @phase = @project_lead.phases.new(phase_params)
+    return render :new, notice: 'Phase not Saved !' unless @phase.save
 
+    redirect_to project_lead_phases_path, notice: 'Phase was successfully created.'
   end
 
   def update
     respond_to do |format|
       if @phase.update(phase_params)
-        format.html { redirect_to @phase, notice: 'Phase Updated !'}
+        format.html { redirect_to project_lead_phases_url, notice: 'Phase Updated !'}
         format.json { render :show, status: :ok, location: @phase }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,7 +37,7 @@ class PhasesController < ApplicationController
   def destroy
     @phase.destroy
     respond_to do |format|
-      format.html { redirect_to phases_url, notice: 'Phase Deleted !' }
+      format.html { redirect_to project_lead_phases_url, notice: 'Phase Deleted !' }
       format.json { head :no_content }
     end
   end
@@ -60,10 +49,10 @@ class PhasesController < ApplicationController
   end
 
   def phase_params
-    params.require(:phase).permit(:name, :due_date, :status, :created_at, :updated_at, :project_lead_id)
+    params.require(:phase).permit(:name, :due_date, :status, :user_id)
   end
 
-  def load_user
-    @user = User.find(params[:phase][:user_id])
+  def set_project_lead
+    @project_lead ||= ProjectLead.find(params[:project_lead_id])
   end
 end

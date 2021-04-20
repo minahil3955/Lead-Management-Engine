@@ -22,15 +22,10 @@
         <%= form.text_field :platform %>
       </div>
 
-       <div class = 'form-group '>
-      <%= form.label 'Sale Status'%>
-      <%= select_tag :is_sale, options_for_select(ProjectLead.is_sales), { :prompt => 'Choose Sale Status', :selected => @project_lead.is_sale} %>
+      <div class = 'form-group '>
+        <%= form.label 'Sale Status'%>
+        <%= form.select(:is_sale, ProjectLead.is_sales.keys.map {|sale| [sale.titleize,sale]}) %>
     </div>
-
-      <div class="form-group">
-        <p><b><%= form.label :Assignee %></b></p>
-        <%= form.collection_select(:user_id, User.all, :id, :name, { :prompt => 'Select Assignee', :selected => @project_lead.user_id }, { class: '' })%>
-      </div>
 
       <div class="form-group">
         <p><b><%= form.label :client %></b></p>
