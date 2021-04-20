@@ -19,7 +19,7 @@
         <td><%= phase.name %></td>
         <td><%= phase.due_date %></td>
         <td><%= phase.status %></td>
-        <td><%=  phase.created_at.year.to_s + '-' + phase.created_at.month.to_s + '-' + phase.created_at.day.to_s %></td>
+        <td><%= phase.created_at.to_date %></td>
         <td><%= link_to phase.project_lead.name, project_lead_path(phase.project_lead_id) %></td>
         <td><%= link_to 'Show', phase %></td>
         <td><%= link_to 'Edit', edit_phase_path(phase) %></td>

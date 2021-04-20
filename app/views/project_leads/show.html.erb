@@ -2,13 +2,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @project_lead.user_id %>
+  <strong>Assignee:</strong>
+  <%= @project_lead.user.name %>
 </p>
 
 <p>
   <strong>Client:</strong>
-  <%= @project_lead.client_id %>
+  <%= @project_lead.client.name %>
 </p>
 
 <p>
@@ -28,17 +28,9 @@
 
 <p>
   <strong>Created Date</strong>
-  <td><%= @project_lead.created_at.year.to_s + '-' + @project_lead.created_at.month.to_s + '-' + @project_lead.created_at.day.to_s %></td>
+  <td><%= @project_lead.created_at.to_date %></td>
 </p>
 
-<p>
-  <strong>Updatation Date</strong>
-  <%= @project_lead.updated_at %>
-</p>
-
-<%= link_to 'Edit', edit_project_lead_path(@project_lead) %> |
-<%= link_to 'Back', project_leads_path %>
-<br>
 <%= render partial: 'comments/comments', locals: {commentable: @project_lead}%>
 <%= render partial: 'comments/form', locals: {commentable: @project_lead}%>
 </div>

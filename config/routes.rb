@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   resources :phases do
     resources :comments, module: :phases
   end
+  resources :projects, only: [:index]
 
-  get 'projects', to: 'project_leads#project_index', as: 'projects_index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

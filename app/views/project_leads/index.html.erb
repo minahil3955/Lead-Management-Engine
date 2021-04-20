@@ -23,7 +23,7 @@
         <td><%= project_lead.is_sale %></td>
         <td><%= project_lead.user.name %></td>
         <td><%= link_to project_lead.client.name, client_path(project_lead.client_id) %></td>
-        <td><%= project_lead.created_at.year.to_s + '-' + project_lead.created_at.month.to_s + '-' + project_lead.created_at.day.to_s %></td>
+        <td><%= project_lead.created_at.to_date %></td>
         <td><%= link_to 'Show', project_lead %></td>
         <td><%= link_to 'Edit', edit_project_lead_path(project_lead) %></td>
         <td><%= link_to 'Delete', project_lead, method: :delete, data: { confirm: 'Are you sure ?' } %></td>
@@ -34,7 +34,9 @@
 
 <div class = 'row'>
   <div class = 'col-md-8 offset-md-4'>
-    <button  class="btn btn-dark"><%= link_to 'Create New Lead', new_project_lead_path %></button>
+    <%# <%if current_user.roles.include?('Business_Developer') %>
+      <button  class="btn btn-dark"><%= link_to 'Create New Lead', new_project_lead_path %></button>
+    <%# <% end %>
     <button  class="btn btn-dark"><%= link_to 'Add Phase to Lead', new_phase_path %></button>
   </div>
 <div>

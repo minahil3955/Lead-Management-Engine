@@ -1,6 +1,6 @@
 class ProjectLeadsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_project_lead, only: %i[show edit update destroy]
+
 
   def index
     @project_leads = ProjectLead.open
@@ -12,6 +12,7 @@ class ProjectLeadsController < ApplicationController
 
   def new
     @project_lead = current_user.project_leads.new
+    # authorize @project_lead
   end
 
   def edit
@@ -19,6 +20,7 @@ class ProjectLeadsController < ApplicationController
   end
 
   def create
+    # authorize @project_lead
     @project_lead = current_user.project_leads.new(project_lead_params)
 
     respond_to do |format|
@@ -52,10 +54,6 @@ class ProjectLeadsController < ApplicationController
     end
   end
 
-  def project_index
-    @project_leads = ProjectLead.close
-    render :project
-  end
 
   private
 
@@ -66,4 +64,5 @@ class ProjectLeadsController < ApplicationController
   def project_lead_params
     params.require(:project_lead).permit(:user_id, :client_id, :name, :platform, :is_sale, :created_at, :updated_at)
   end
+
 end

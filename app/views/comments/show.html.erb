@@ -13,6 +13,6 @@
 
 <p>
   <strong>Creation Date:</strong>
-  <td><%=  @comment.created_at.year.to_s + '/' + @comment.created_at.month.to_s + '/' + @comment.created_at.day.to_s %></td>
+  <td><%=  @comment.created_at.to_date %></td>
 </p>
 <div>

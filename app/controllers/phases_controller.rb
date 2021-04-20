@@ -1,13 +1,13 @@
 class PhasesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_phase, only: %i[show edit update destroy]
+  before_action :load_user, only: %i[create]
 
   def index
     @phases = Phase.all
   end
 
   def show
-    # ..
+    @role = Role.Engineer
   end
 
   def new
@@ -20,9 +20,9 @@ class PhasesController < ApplicationController
 
   def create
     @phase = Phase.new(phase_params)
-
     respond_to do |format|
       if @phase.save
+        AssigneeMailer.with(user: @user, phase: @phase).assignment_email.deliver_now
         format.html { redirect_to @phase, notice: 'Phase Created Sucessfully !' }
         format.json { render :show, status: :created, location: @phase }
       else
@@ -30,6 +30,7 @@ class PhasesController < ApplicationController
         format.json { render json: @phase.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   def update
@@ -60,5 +61,9 @@ class PhasesController < ApplicationController
 
   def phase_params
     params.require(:phase).permit(:name, :due_date, :status, :created_at, :updated_at, :project_lead_id)
+  end
+
+  def load_user
+    @user = User.find(params[:phase][:user_id])
   end
 end

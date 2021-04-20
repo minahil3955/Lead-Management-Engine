@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_comment, only: %i[show edit update destroy]
 
   def index
@@ -16,6 +15,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new comment_params
+    @comment.body = current_user.name + ': '  + @comment.body
     @comment.save
     redirect_to @commentable, notice: 'Comment Posted Sucessfully !'
   end
