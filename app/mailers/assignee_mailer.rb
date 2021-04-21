@@ -3,6 +3,6 @@ class AssigneeMailer < ApplicationMailer
   def assignment_email
     @user = params[:user]
     @phase = params[:phase]
-    mail(to: @user.email, subject: 'Phase Assigned')
+    mail(to: @user.email, subject: 'New Phase Assigned')
   end
 end

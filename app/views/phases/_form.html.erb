@@ -19,7 +19,7 @@
 
      <div class='form-group'>
         <p><%= form.label :user_id %></p>
-        <%= form.collection_select(:user_id, User.all, :id, :name, { prompt: 'Choose Assignee', :selected => @phase.user_id })%>
+        <%= form.collection_select(:user_id, User.joins(:roles).where('roles.name =? ', 2), :id, :name, { prompt: 'Assign Manager', :selected => @phase.user_id })%>
     </div>
 
     <div class='form-group'>
