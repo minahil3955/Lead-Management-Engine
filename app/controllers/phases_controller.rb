@@ -1,5 +1,4 @@
 class PhasesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_phase, only: %i[show edit update destroy]
   before_action :set_project_lead
 
