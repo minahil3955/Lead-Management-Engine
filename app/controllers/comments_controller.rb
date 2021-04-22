@@ -1,13 +1,9 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
 
-  def index
-    @comments = Comment.all
-  end
-
-  def show
-    # ..
-  end
+  def show; end
 
   def new
     @comment = Comment.new
@@ -15,20 +11,20 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @commentable.comments.new comment_params
-    @comment.body = current_user.name + ': '  + @comment.body
+    @comment.body = "#{current_user.name} :  #{@comment.body}"
     @comment.save
     if @commentable.instance_of?(Phase)
       return redirect_to [@commentable.project_lead, @commentable],
                          notice: 'Comment Posted successfully.'
+    end
     redirect_to @commentable, notice: 'Comment Posted Sucessfully !'
   end
-end
 
   def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment Deleted' }
-      format.json { head :no_content }
+    if @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to comments_url, notice: 'Comment Deleted' }
+      end
     end
   end
 

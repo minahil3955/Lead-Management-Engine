@@ -1,10 +1,12 @@
 class ProjectLead < ApplicationRecord
-  validates :name, :platform, presence: true
-  validates :name, :platform, length: { minimum: 3 }
+  has_many :phases
+  has_many :comments, as: :commentable
+
   belongs_to :user
   belongs_to :project, optional: true
   belongs_to :client
-  has_many :phases
-  has_many :comments, as: :commentable
+
+  validates :name, :platform, presence: true
+  validates :name, :platform, length: { minimum: 3 }
   enum sale_status: %i[open close]
 end

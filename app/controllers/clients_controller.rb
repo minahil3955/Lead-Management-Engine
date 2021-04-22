@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[show edit update destroy]
 
@@ -15,30 +17,22 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-
-    respond_to do |format|
-      if @client.save
+    if @client.save
+      respond_to do |format|
         format.html { redirect_to @client, notice: 'Client was successfully created' }
-        format.json { render :show, status: :created, location: @client }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
       end
+    else render show
     end
   end
 
   def update
-    respond_to do |format|
-      if @client.update(client_params)
+    if @client.update(client_params)
+      respond_to do |format|
         format.html { redirect_to @client, notice: 'Client was successfully updated' }
-        format.json { render :show, status: :ok, location: @client }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
       end
+    else render edit
     end
   end
-
 
   private
 

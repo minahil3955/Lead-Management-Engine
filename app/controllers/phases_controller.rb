@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhasesController < ApplicationController
   before_action :set_phase, only: %i[show edit update destroy]
   before_action :set_project_lead
@@ -22,22 +24,19 @@ class PhasesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @phase.update(phase_params)
-        format.html { redirect_to project_lead_phases_url, notice: 'Phase Updated !'}
-        format.json { render :show, status: :ok, location: @phase }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @phase.errors, status: :unprocessable_entity }
+    if @phase.update(phase_params)
+      respond_to do |format|
+        format.html { redirect_to project_lead_phases_url, notice: 'Phase Updated !' }
       end
+    else render edit
     end
   end
 
   def destroy
-    @phase.destroy
-    respond_to do |format|
-      format.html { redirect_to project_lead_phases_url, notice: 'Phase Deleted !' }
-      format.json { head :no_content }
+    if @phase.destroy
+      respond_to do |format|
+        format.html { redirect_to project_lead_phases_url, notice: 'Phase Deleted !' }
+      end
     end
   end
 
