@@ -23,7 +23,7 @@
         <td><%= link_to phase.project_lead.name, project_lead_path(phase.project_lead_id) %></td>
         <td><%= link_to 'Show', project_lead_phase_path(@project_lead, phase) %></td>
         <td><%= link_to 'Edit', edit_project_lead_phase_path(@project_lead, phase) %></td>
-        <td><%= link_to 'Mark Complete', project_lead_phase_path(@project_lead, phase), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete ', project_lead_phase_path(@project_lead, phase), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

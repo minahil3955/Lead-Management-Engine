@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'project_lead/:project_lead_id/phase/:id', to: 'phases#complete', as: 'phase_complete'
+  post 'project_lead/:project_lead_id/phase/:id', to: 'phases#engineer', as: 'phase_engineers'
+
   resources :projects, only: [:index]
 
   devise_for :admin_users, ActiveAdmin::Devise.config

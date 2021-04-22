@@ -18,6 +18,14 @@
     <td><%= @phase.created_at.to_date %></td>
   </p>
 
+<h4>Engineers</h4>
+</div>
+  <%= render partial: 'phases/enginner', collection: @engineers %>
+<br>
+<%= render partial: 'phases/enginner_form', locals: {project_lead: @phase.project_lead} %>
+ <% if @phase.active? %>
+ <%= link_to 'Mark as complete', phase_complete_path(@project_lead, @phase) %>
+ <% end %>
 <h4>
   <b>Comments<b>
 </h4>
