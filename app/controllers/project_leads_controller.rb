@@ -22,7 +22,7 @@ class ProjectLeadsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @project_lead, notice: 'Lead successfully created.' }
       end
-    else render new
+    else render 'new'
     end
   end
 
@@ -31,7 +31,7 @@ class ProjectLeadsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @project_lead, notice: 'Lead updated.' }
       end
-    else render edit
+    else render 'edit'
     end
   end
 
@@ -40,7 +40,7 @@ class ProjectLeadsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to project_leads_url, notice: 'Lead destroyed.' }
       end
-    else render show
+    else render 'show'
     end
   end
 

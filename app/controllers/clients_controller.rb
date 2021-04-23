@@ -19,7 +19,7 @@ class ClientsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @client, notice: 'Client was successfully created' }
       end
-    else render show
+    else render 'new'
     end
   end
 
@@ -28,7 +28,7 @@ class ClientsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to @client, notice: 'Client was successfully updated' }
       end
-    else render edit
+    else render 'edit'
     end
   end
 

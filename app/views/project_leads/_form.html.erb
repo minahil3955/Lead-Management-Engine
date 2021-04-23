@@ -14,12 +14,12 @@
     <div class="col-md-8 offset-md-3">
       <div class="form-group">
         <p><b><%= form.label :name %></b><p>
-        <%= form.text_field :name %>
+        <%= form.text_field :name, required: true %>
       </div>
 
       <div class="form-group">
         <p><b><%= form.label :platform %></b></p>
-        <%= form.text_field :platform %>
+        <%= form.text_field :platform, required: true %>
       </div>
 
       <div class='form-group '>

@@ -47,7 +47,7 @@ class PhasesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to project_lead_phases_url, notice: 'Phase Updated !' }
       end
-    else render edit
+    else render 'edit'
     end
   end
 
