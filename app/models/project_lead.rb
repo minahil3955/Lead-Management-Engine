@@ -1,5 +1,5 @@
 class ProjectLead < ApplicationRecord
-  has_many :phases
+  has_many :phases, dependent: :destroy
   has_many :comments, as: :commentable
 
   belongs_to :user
@@ -8,5 +8,6 @@ class ProjectLead < ApplicationRecord
 
   validates :name, :platform, presence: true
   validates :name, :platform, length: { minimum: 3 }
+
   enum sale_status: %i[open close]
 end

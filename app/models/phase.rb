@@ -7,6 +7,7 @@ class Phase < ApplicationRecord
 
   validates :due_date, :status, :name, presence: true
   validate :due_date_in_future
+
   enum status: %i[active inactive], _default: :active
 
   after_create :send_email
