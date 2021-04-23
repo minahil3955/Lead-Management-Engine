@@ -1,0 +1,63 @@
+# frozen_string_literal: true
+
+class PhasePolicy < ApplicationPolicy
+  attr_reader :user, :phase
+
+  def initialize(user, phase)
+    super
+    @user = user
+    @phase = phase
+  end
+
+  def index?
+    true
+  end
+
+  def show?
+    true
+  end
+
+  def create?
+    owner?
+  end
+
+  def new?
+    create?
+  end
+
+  def update?
+    owner?
+  end
+
+  def edit?
+    owner?
+  end
+
+  def destroy?
+    owner?
+  end
+
+  def engineer?
+    phase_assignee?
+  end
+
+  def complete?
+    @user.id == @phase.project_lead.user_id || phase_assignee?
+  end
+
+  private
+
+  def owner?
+    @user.id == @phase.project_lead.user_id
+  end
+
+  def phase_assignee?
+    @phase.users.roles.pluck(:name).include?('Business_Developer').exists?(@user.id)
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
+  end
+end

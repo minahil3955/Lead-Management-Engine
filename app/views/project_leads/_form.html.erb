@@ -32,13 +32,12 @@
         <%= form.collection_select(:client_id, Client.all, :id, :name, { :multiple => true }, { :prompt => 'Select Old Client', :selected => @project_lead.client_id })%>
         or <%= link_to "Create New Client",  new_client_path %>
       </div>
-        <%# <%if current_user.business_developer? %>
-        <div class='row'>
-          <div class='col-md-8 offset-md-3'>
-            <button action = 'submit'  class='btn btn-dark px-3 py-2'> Create Lead </button>
-          </div>
+
+      <div class='row'>
+        <div class='col-md-8 offset-md-3'>
+          <button action = 'submit'  class='btn btn-dark px-3 py-2'> Create Lead </button>
+        </div>
       </div>
-      <%# <% end %>
     </div>
   </div>
 </div>

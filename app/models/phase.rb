@@ -15,10 +15,6 @@ class Phase < ApplicationRecord
     errors.add(:due_date, "can't be in the past") if due_date.present? && due_date < Date.today
   end
 
-  def engineer
-    @engineers = User.joins(:roles).where('roles.name =? ', 1)
-  end
-
   private
 
   def send_email

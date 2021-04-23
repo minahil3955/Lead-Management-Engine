@@ -3,6 +3,7 @@
 class PhasesController < ApplicationController
   before_action :set_phase, only: %i[show edit update engineer destroy complete]
   before_action :set_project_lead
+  before_action :set_engineer, only: :show
 
   def index
     @phases = @project_lead.phases
@@ -14,12 +15,16 @@ class PhasesController < ApplicationController
 
   def new
     @phase = @project_lead.phases.new
+    authorize @phase
   end
 
-  def edit; end
+  def edit
+    authorize @phase
+  end
 
   def create
     @phase = @project_lead.phases.new(phase_params)
+    authorize @phase
     return render :new, notice: 'Phase not Saved !' unless @phase.save
 
     redirect_to project_lead_phases_path, notice: 'Phase was successfully created.'
@@ -37,6 +42,7 @@ class PhasesController < ApplicationController
   end
 
   def update
+    authorize @phase
     if @phase.update(phase_params)
       respond_to do |format|
         format.html { redirect_to project_lead_phases_url, notice: 'Phase Updated !' }
@@ -46,6 +52,7 @@ class PhasesController < ApplicationController
   end
 
   def destroy
+    authorize @phase
     if @phase.destroy
       respond_to do |format|
         format.html { redirect_to project_lead_phases_url, notice: 'Phase Deleted !' }
@@ -74,5 +81,10 @@ class PhasesController < ApplicationController
 
   def set_project_lead
     @project_lead ||= ProjectLead.find(params[:project_lead_id])
+  end
+
+  def set_engineer
+    @phase_engineers = @phase.users
+    @engineers = User.joins(:roles).where('roles.name =? ', 1)
   end
 end

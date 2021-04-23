@@ -10,14 +10,13 @@ class ProjectLeadsController < ApplicationController
   def show; end
 
   def new
+    authorize ProjectLead
     @project_lead = current_user.project_leads.new
-    # authorize @project_lead
   end
 
   def edit; end
 
   def create
-    # authorize @project_lead
     @project_lead = current_user.project_leads.new(project_lead_params)
     if @project_lead.save
       respond_to do |format|
@@ -49,6 +48,7 @@ class ProjectLeadsController < ApplicationController
 
   def set_project_lead
     @project_lead = ProjectLead.find(params[:id])
+    authorize @project_lead
   end
 
   def project_lead_params

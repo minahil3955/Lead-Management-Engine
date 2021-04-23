@@ -18,18 +18,20 @@
     <td><%= @phase.created_at.to_date %></td>
   </p>
 
-<h4>Engineers</h4>
-</div>
-  <%= render partial: 'phases/enginner', collection: @engineers %>
-<br>
-<%= render partial: 'phases/enginner_form', locals: {project_lead: @phase.project_lead} %>
- <% if @phase.active? %>
- <%= link_to 'Mark as complete', phase_complete_path(@project_lead, @phase) %>
- <% end %>
-<h4>
-  <b>Comments<b>
-</h4>
- <%= render partial: 'comments/comments', collection: @phase.comments, as: :comment, locals: {project_lead: @phase.project_lead} %>
- <%= render partial: 'comments/phase_form', locals: {commentable: project_lead_phase_path(@project_lead, @phase)}%>
+  <h4>Engineers</h4>
+
+  <%= render partial: 'phases/enginner', collection: @phase_engineers, as: :user %>
+  <br>
+  <%= render partial: 'phases/enginner_form', locals: {project_lead: @phase.project_lead} %>
+
+  <% if @phase.active? %>
+  <button><%= link_to 'Mark Phase Complete', phase_complete_path(@project_lead, @phase) %></button>
+  <% end %>
+
+  <h4>
+    <b>Comments<b>
+  </h4>
+  <%= render partial: 'comments/comments', collection: @phase.comments, as: :comment, locals: {project_lead: @phase.project_lead} %>
+  <%= render partial: 'comments/phase_form', locals: {commentable: project_lead_phase_path(@project_lead, @phase)}%>
 </div>
 

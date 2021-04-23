@@ -28,7 +28,10 @@
     <li class="navbar-text px-2">
       <%= link_to 'Projects', projects_path %>
     </ul>
-    <span class="navbar-text">
+    <span class="navbar-text px-2 text-white">
+      <%= current_user.name %>
+    </span>
+    <span class="navbar-text px-2 text-white">
       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
     </span>
     <%else%>
