@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 
 class AddConfirmableToDevise < ActiveRecord::Migration[4.2]
   def up

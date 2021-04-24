@@ -63,17 +63,3 @@ class PhasesController < ApplicationController
   def set_phase
     @phase = Phase.find(params[:id])
   end
-
-  def phase_params
-    params.require(:phase).permit(:name, :due_date, :status, :user_id)
-  end
-
-  def set_project_lead
-    @set_project_lead ||= ProjectLead.find(params[:project_lead_id])
-  end
-
-  def set_engineer
-    @phase_engineers = @phase.users
-    @engineers = User.role_engineer
-  end
-end

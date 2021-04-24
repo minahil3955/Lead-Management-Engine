@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CreateFormerLeads < ActiveRecord::Migration[6.1]
   def change
     create_table :project_leads do |t|

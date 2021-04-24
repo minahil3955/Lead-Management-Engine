@@ -24,9 +24,7 @@
   <br>
   <%= render partial: 'phases/enginner_form', locals: {project_lead: @phase.project_lead} %>
   <% if @phase.active? %>
-  <p class = 'my-2'><%= link_to 'Mark Phase Complete', phase_complete_path(@project_lead, @phase) %></p>
-  <%# <p class = 'my-2'><%= link_to 'Mark Phase Complete', complete_project_lead_phase(@project_lead, @phase) %>
-  <%# </p> %>
+  <p class = 'my-2'><%= link_to 'Mark Phase Complete', complete_project_lead_phase_path(@set_project_lead, @phase) %></p>
   <% end %>
   <h4>
     <b>Comments<b>
