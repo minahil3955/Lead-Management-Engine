@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Client < ApplicationRecord
-  has_many :project_leads
+  has_many :project_leads, dependent: :destroy
 
   validates :name, :email, :address, :contact, presence: true
   validates :name, :email, :address, :contact, length: { minimum: 3 }

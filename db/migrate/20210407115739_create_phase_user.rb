@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePhaseUser < ActiveRecord::Migration[6.1]
   def change
     create_table :phases_users do |t|

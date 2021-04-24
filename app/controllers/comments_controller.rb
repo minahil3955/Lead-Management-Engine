@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[show]
 
   def show; end
 
@@ -18,14 +18,6 @@ class CommentsController < ApplicationController
                          notice: 'Comment Posted successfully.'
     end
     redirect_to @commentable, notice: 'Comment Posted Sucessfully !'
-  end
-
-  def destroy
-    if @comment.destroy
-      respond_to do |format|
-        format.html { redirect_to comments_url, notice: 'Comment Deleted' }
-      end
-    end
   end
 
   private

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[show edit update destroy]
+  before_action :set_client, only: %i[edit update show]
 
   def index
     @clients = Client.all
@@ -11,23 +11,21 @@ class ClientsController < ApplicationController
     @client = Client.new
   end
 
+  def show; end
+
   def edit; end
 
   def create
     @client = Client.new(client_params)
     if @client.save
-      respond_to do |format|
-        format.html { redirect_to @client, notice: 'Client was successfully created' }
-      end
+      redirect_to @client, notice: 'Client was successfully created'
     else render 'new'
     end
   end
 
   def update
     if @client.update(client_params)
-      respond_to do |format|
-        format.html { redirect_to @client, notice: 'Client was successfully updated' }
-      end
+      redirect_to @client, notice: 'Client was successfully updated'
     else render 'edit'
     end
   end

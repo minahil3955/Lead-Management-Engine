@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register ProjectLead do
   permit_params :user_id, :client_id, :name, :platform, :sale_status
 

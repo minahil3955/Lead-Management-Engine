@@ -1,5 +1,5 @@
 <div class="">
-  <%= form_for @phase, url: phase_engineers_url(@project_lead), method: :post do |f| %>
+  <%= form_for @phase, url: phase_engineers_url(@set_project_lead), method: :post do |f| %>
      <%= collection_select(:engineer, :user_id, @engineers, :id, :name) %>
     <div class='actions'>
       <button action='submit'>Add Engineer</button>

@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 class PhasesController < ApplicationController
-  before_action :set_phase, only: %i[show edit update engineer destroy complete]
+  before_action :set_phase, only: %i[show edit update engineer complete]
   before_action :set_project_lead
   before_action :set_engineer, only: :show
 
   def index
-    @phases = @project_lead.phases
+    @phases = @set_project_lead.phases
   end
 
   def show
-    @users = User.joins(:roles).where('roles.name =? ', 2)
+    @users = User.role_manager
   end
 
   def new
-    @phase = @project_lead.phases.new
+    @phase = @set_project_lead.phases.new
     authorize @phase
   end
 
@@ -23,7 +23,7 @@ class PhasesController < ApplicationController
   end
 
   def create
-    @phase = @project_lead.phases.new(phase_params)
+    @phase = @set_project_lead.phases.new(phase_params)
     authorize @phase
     return render :new, notice: 'Phase not Saved !' unless @phase.save
 
@@ -44,19 +44,8 @@ class PhasesController < ApplicationController
   def update
     authorize @phase
     if @phase.update(phase_params)
-      respond_to do |format|
-        format.html { redirect_to project_lead_phases_url, notice: 'Phase Updated !' }
-      end
+      redirect_to project_lead_phases_url, notice: 'Phase Updated !'
     else render 'edit'
-    end
-  end
-
-  def destroy
-    authorize @phase
-    if @phase.destroy
-      respond_to do |format|
-        format.html { redirect_to project_lead_phases_url, notice: 'Phase Deleted !' }
-      end
     end
   end
 
@@ -80,11 +69,11 @@ class PhasesController < ApplicationController
   end
 
   def set_project_lead
-    @project_lead ||= ProjectLead.find(params[:project_lead_id])
+    @set_project_lead ||= ProjectLead.find(params[:project_lead_id])
   end
 
   def set_engineer
     @phase_engineers = @phase.users
-    @engineers = User.joins(:roles).where('roles.name =? ', 1)
+    @engineers = User.role_engineer
   end
 end

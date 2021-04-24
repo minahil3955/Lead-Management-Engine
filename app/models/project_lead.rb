@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ProjectLead < ApplicationRecord
   has_many :phases, dependent: :destroy
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
 
   belongs_to :user
   belongs_to :project, optional: true

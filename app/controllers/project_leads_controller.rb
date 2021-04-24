@@ -19,27 +19,21 @@ class ProjectLeadsController < ApplicationController
   def create
     @project_lead = current_user.project_leads.new(project_lead_params)
     if @project_lead.save
-      respond_to do |format|
-        format.html { redirect_to @project_lead, notice: 'Lead successfully created.' }
-      end
+      redirect_to @project_lead, notice: 'Lead successfully created.'
     else render 'new'
     end
   end
 
   def update
     if @project_lead.update(project_lead_params)
-      respond_to do |format|
-        format.html { redirect_to @project_lead, notice: 'Lead updated.' }
-      end
+      redirect_to @project_lead, notice: 'Lead updated.'
     else render 'edit'
     end
   end
 
   def destroy
     if @project_lead.destroy
-      respond_to do |format|
-        format.html { redirect_to project_leads_url, notice: 'Lead destroyed.' }
-      end
+      redirect_to project_leads_url, notice: 'Lead destroyed.'
     else render 'show'
     end
   end

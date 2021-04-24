@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectLeadPolicy < ApplicationPolicy
   attr_reader :user, :project_lead
 
@@ -44,15 +46,6 @@ class ProjectLeadPolicy < ApplicationPolicy
   end
 
   class Scope
-    attr_reader :user, :project_lead, :role
-
-    def initialize(user, project_lead, role)
-      super
-      @user = user
-      @project_lead = project_lead
-      @role = role
-    end
-
     def resolve
       scope
     end
