@@ -10,7 +10,7 @@ class PhasesController < ApplicationController
   end
 
   def show
-    @users = User.role_manager
+    @users = User.manager
   end
 
   def new
@@ -74,6 +74,6 @@ class PhasesController < ApplicationController
 
   def set_engineer
     @phase_engineers = @phase.users
-    @engineers = User.role_engineer
+    @engineers = User.engineer
   end
 end

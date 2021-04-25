@@ -16,8 +16,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
-  scope :role_manager, -> { joins(:roles).where('roles.name =? ', 2) }
-  scope :role_engineer, -> { joins(:roles).where('roles.name =? ', 1) }
+  scope :manager, -> { joins(:roles).where('roles.name =? ', 2) }
+  scope :engineer, -> { joins(:roles).where('roles.name =? ', 1) }
 
   def business_developer?
     roles.pluck(:name).include?('Business_Developer')
