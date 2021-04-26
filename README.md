@@ -1,7 +1,5 @@
 # Lead-Management-Engine
 This product is aimed at managing sales leads and their process in an organization.
-# Lead-Management-Engine
-This product is aimed at managing sales leads and their process in an organization.
 ## Assumptions:
    - User having role of Business Developer can only create Leads.
    - Only Creator of Lead can add Phases on it.
