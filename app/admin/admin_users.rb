@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation
 
@@ -6,7 +8,6 @@ ActiveAdmin.register AdminUser do
     id_column
     column :email
     column :created_at
-    actions
   end
 
   filter :email

@@ -1,27 +1,41 @@
+<h3 class="bg-secondary text-white text-center py-2">Phase</h3>
+
 <div class = 'mx-3 my-2'>
-  <p>
-    <strong>Phase Name:</strong>
-    <%= @phase.name %>
-  </p>
-  <p>
-    <strong>Due date:</strong>
-    <%= @phase.due_date %>
-  </p>
+  <table class="table table-striped my-5">
+    <tr>
+      <th>Phase Name</th>
+      <td><%= @phase.name %></td>
+    </tr>
+    <tr>
+      <th>Due Date</th>
+      <td><%= @phase.due_date %></td>
+    </tr>
+    <tr>
+      <th>Current Status</th>
+      <td><%= @phase.status %></td>
+    </tr>
+    <tr>
+      <th>Creation</th>
+      <td><%= @phase.created_at.to_date %></td>
+    </tr>
+</table>
 
-  <p>
-    <strong>Current Status:</strong>
-    <%= @phase.status %>
-  </p>
+  <h4>Engineers</h4>
 
-  <p>
-    <strong>Creation:</strong>
-    <td><%= @phase.created_at.to_date %></td>
-  </p>
+  <%= render partial: 'phases/enginner', collection: @phase_engineers, as: :user %>
 
-<h4>
-  <b>Comments<b>
-</h4>
- <%= render partial: 'comments/comments', collection: @phase.comments, as: :comment, locals: {project_lead: @phase.project_lead} %>
- <%= render partial: 'comments/phase_form', locals: {commentable: project_lead_phase_path(@project_lead, @phase)}%>
+  <br>
+
+  <%= render partial: 'phases/enginner_form', locals: {project_lead: @phase.project_lead} %>
+
+  <% if @phase.active? %>
+    <p class = 'my-2'><%= link_to 'Mark Phase Complete', complete_project_lead_phase_path(@set_project_lead, @phase) %></p>
+  <% end %>
+
+  <h4><b>Comments<b></h4>
+
+  <%= render partial: 'comments/comments', collection: @phase.comments, as: :comment, locals: {project_lead: @phase.project_lead} %>
+
+  <%= render partial: 'comments/phase_form', locals: {commentable: project_lead_phase_path(@set_project_lead, @phase)}%>
 </div>
 

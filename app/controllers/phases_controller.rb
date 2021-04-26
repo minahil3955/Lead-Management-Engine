@@ -1,44 +1,59 @@
+# frozen_string_literal: true
+
 class PhasesController < ApplicationController
-  before_action :set_phase, only: %i[show edit update destroy]
+  before_action :set_phase, only: %i[show edit update engineer complete]
   before_action :set_project_lead
+  before_action :set_engineer, only: :show
+  before_action :authorize_phase, only: %i[edit update]
 
   def index
-    @phases = @project_lead.phases
+    @phases = @set_project_lead.phases
   end
 
-  def show; end
+  def show
+    @users = User.manager
+  end
 
   def new
-    @phase = @project_lead.phases.new
+    @phase = @set_project_lead.phases.new
+    authorize_phase
   end
 
   def edit; end
 
   def create
-    @phase = @project_lead.phases.new(phase_params)
+    @phase = @set_project_lead.phases.new(phase_params)
+    authorize_phase
     return render :new, notice: 'Phase not Saved !' unless @phase.save
 
     redirect_to project_lead_phases_path, notice: 'Phase was successfully created.'
   end
 
+  def engineer
+    engineer = User.find(params[:engineer][:user_id])
+    if @phase.users.exists?(engineer.id)
+      flash[:alert] = 'Already Assigned'
+    else
+      @phase.users.append(engineer)
+      flash[:notice] = 'Engineer Assigned.'
+    end
+    redirect_to project_lead_phase_url(@phase.project_lead_id)
+  end
+
   def update
-    respond_to do |format|
-      if @phase.update(phase_params)
-        format.html { redirect_to project_lead_phases_url, notice: 'Phase Updated !'}
-        format.json { render :show, status: :ok, location: @phase }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @phase.errors, status: :unprocessable_entity }
-      end
+    if @phase.update(phase_params)
+      redirect_to project_lead_phases_url, notice: 'Phase Updated !'
+    else render 'edit'
     end
   end
 
-  def destroy
-    @phase.destroy
-    respond_to do |format|
-      format.html { redirect_to project_lead_phases_url, notice: 'Phase Deleted !' }
-      format.json { head :no_content }
+  def complete
+    if @phase.inactive!
+      flash[:notice] = 'Phase marked as complete successfully'
+    else
+      flash[:alert] = 'Phase can not be mark as complete '
     end
+    redirect_to project_lead_phases_url(@phase.project_lead_id)
   end
 
   private
@@ -52,6 +67,15 @@ class PhasesController < ApplicationController
   end
 
   def set_project_lead
-    @project_lead ||= ProjectLead.find(params[:project_lead_id])
+    @set_project_lead ||= ProjectLead.find(params[:project_lead_id])
+  end
+
+  def set_engineer
+    @phase_engineers = @phase.users
+    @engineers = User.engineer
+  end
+
+  def authorize_phase
+    authorize @phase
   end
 end

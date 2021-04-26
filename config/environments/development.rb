@@ -1,4 +1,6 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -82,5 +84,6 @@ Rails.application.configure do
     user_name:            'minahil.mustafa@devsinc.com',
     password:             'minahil3955',
     authentication:       'plain',
-    enable_starttls_auto: true }
+    enable_starttls_auto: true
+  }
 end

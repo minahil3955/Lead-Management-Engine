@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  resources :comments
+  resources :projects, only: [:index]
   resources :clients, except: [:destroy]
   resources :project_leads do
     resources :comments, module: :project_leads
     resources :phases do
       resources :comments, module: :phases
+      get 'complete', on: :member
+      post 'engineer', on: :member
     end
   end
-
-  resources :projects, only: [:index]
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

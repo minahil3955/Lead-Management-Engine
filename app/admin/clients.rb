@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Client do
   permit_params :name, :address, :email, :contact, project_leads_attributes: [:name]
 

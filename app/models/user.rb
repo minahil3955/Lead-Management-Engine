@@ -1,14 +1,25 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
-  devise :registerable, :confirmable
-  validates :email, presence: true, uniqueness: true
-  validates :name, presence: true
   has_and_belongs_to_many :phases
   has_and_belongs_to_many :roles
   has_many :project_leads, dependent: :destroy
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
+
+  validates :roles, length: { minimum: 1 }
+  validates :roles, length: { maximum: 3 }
+  validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
+
   accepts_nested_attributes_for :roles, allow_destroy: true
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable,
+
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
+
+  scope :manager, -> { joins(:roles).where('roles.name =? ', 2) }
+  scope :engineer, -> { joins(:roles).where('roles.name =? ', 1) }
+
+  def business_developer?
+    roles.pluck(:name).include?('Business_Developer')
+  end
 end

@@ -1,4 +1,4 @@
-<%= form_for [commentable, Comment.new] do |form| %>
+<%= form_for [@project_lead, Comment.new] do |form| %>
   <div class="field">
     <%= form.text_area :body, class: 'form-control', placeholder: 'Add a Comment' %>
   </div>

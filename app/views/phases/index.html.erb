@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "application" %>
+
 <h3 class="bg-secondary text-white text-center py-2">Current Phases</h3>
 
 <table class="table table-striped my-5">
@@ -21,16 +21,23 @@
         <td><%= phase.status %></td>
         <td><%= phase.created_at.to_date %></td>
         <td><%= link_to phase.project_lead.name, project_lead_path(phase.project_lead_id) %></td>
-        <td><%= link_to 'Show', project_lead_phase_path(@project_lead, phase) %></td>
-        <td><%= link_to 'Edit', edit_project_lead_phase_path(@project_lead, phase) %></td>
-        <td><%= link_to 'Mark Complete', project_lead_phase_path(@project_lead, phase), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if policy(phase).edit? %>
+          <td><%= link_to 'Show', project_lead_phase_path(@set_project_lead, phase) %></td>
+
+          <% if policy(@set_project_lead).owner? %>
+            <td><%= link_to 'Edit', edit_project_lead_phase_path(@set_project_lead, phase) %></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <div class='row'>
   <div class='col-md-8 offset-md-5'>
-    <button  class="btn btn-dark mx-5"><%= link_to 'Add New Phase', new_project_lead_phase_path(@project_lead) %></button>
+  <% if policy(@set_project_lead).owner? %>
+    <%= link_to 'Add New Phase', new_project_lead_phase_path(@set_project_lead), class: 'btn btn-secondary text-white mx-5' %>
+  <% end %>
   </div>
 <div>
 

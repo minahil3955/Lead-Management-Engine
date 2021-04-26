@@ -1,0 +1,36 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-minitest
+AllCops:
+  # Exclude auto-generated files by Rails
+  TargetRubyVersion: 2.7
+  TargetRailsVersion: 5.2
+  Exclude:
+    - 'config/initializers/devise.rb'
+    - 'config/environments/development.rb'
+    - 'config/environments/production.rb'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'vendor/bundle/**/*'
+    - 'bin/**/*'
+    - 'app/controllers/phases/comments_controller.rb'
+    - 'app/controllers/project_leads/comments_controller.rb'
+    - 'app/controllers/user/sessions_controller.rb'
+    - 'config/initializers/filter_parameter_logging.rb'
+    - 'test/channels/application_cable/connection_test.rb'
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 23
+Metrics/BlockLength:
+  Exclude:
+    - config/**/*
+    - spec/**/*
+    - app/admin/users.rb
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+Style/Documentation:
+  Enabled: false

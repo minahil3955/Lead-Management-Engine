@@ -1,39 +1,43 @@
+<h3 class="bg-secondary text-white text-center py-2">Project Lead Details</h3>
+
+<table class="table table-striped my-5">
+  <tr>
+    <th>Assignee</th>
+    <td><%= @project_lead.user.name %></td>
+  </tr>
+
+  <tr>
+    <th>Client</th>
+    <td><%= @project_lead.client.name %></td>
+  </tr>
+
+  <tr>
+    <th>Lead Name</th>
+    <td><%= @project_lead.name %></td>
+  </tr>
+
+  <tr>
+    <th>Platform</th>
+    <td><%= @project_lead.platform %></td>
+  </tr>
+
+  <tr>
+    <th>Sale Status</th>
+    <td><%= @project_lead.sale_status %></td>
+  </tr>
+
+  <tr>
+    <th>Creation </th>
+    <td><%= @project_lead.created_at.to_date %></td>
+  </tr>
+</table>
+
 <div class = 'my-2 mx-3'>
-<p id="notice"><%= notice %></p>
+  <%= link_to 'Show Phases', project_lead_phases_path(@project_lead), class: 'btn btn-secondary text-white' %>
 
-<p>
-  <strong>Assignee:</strong>
-  <%= @project_lead.user.name %>
-</p>
+  <h3 class="py-2 my-2">Comments</h3>
 
-<p>
-  <strong>Client:</strong>
-  <%= @project_lead.client.name %>
-</p>
+  <%= render partial: 'comments/comments', collection: @project_lead.comments, as: :comment %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project_lead.name %>
-</p>
-
-<p>
-  <strong>Platform:</strong>
-  <%= @project_lead.platform %>
-</p>
-
-<p>
-  <strong>Sale Status:</strong>
-  <%= @project_lead.sale_status %>
-</p>
-
-<p>
-  <strong>Created Date</strong>
-  <td><%= @project_lead.created_at.to_date %></td>
-</p>
-
-<button  class="btn btn-dark"><%= link_to 'Show Phases', project_lead_phases_path(@project_lead) %></button>
-
-<%= render partial: 'comments/comments', collection: @project_lead.comments, as: :comment %>
-<%= render partial: 'comments/lead_form', locals: {commentable: @project_lead}%>
-
+  <%= render partial: 'comments/lead_form', locals: { commentable: project_lead_path(@project_lead) }%>
 </div>

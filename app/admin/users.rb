@@ -1,12 +1,8 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register User do
-  permit_params :email,
-                :name,
-                :password,
-                :encrypted_password,
-                :reset_password_token,
-                :reset_password_sent_at,
-                :remember_created_at,
-                roles_attributes: [:name]
+  permit_params :email, :name, :password, :encrypted_password, :reset_password_token, :reset_password_sent_at,
+                :remember_created_at, roles_attributes: [:name]
   index do
     selectable_column
     column 'Name', :name
@@ -15,6 +11,7 @@ ActiveAdmin.register User do
     column 'Updation Details', :updated_at
     actions defaults: true
   end
+
   show do
     panel 'User Details' do
       table_for user do
@@ -30,18 +27,11 @@ ActiveAdmin.register User do
     active_admin_comments
   end
 
-  # controller do
-  #   # after_action  :send_credentails_email
-  #   def send_credentails_email
-  #     NewUserMailer.send_credentails_email(self).deliver
-  #   end
-  # end
-
   form do |f|
     f.semantic_errors
-    f.inputs :email
-    f.inputs :name
-    f.inputs :password
+    f.inputs :email, required: true
+    f.inputs :name, required: true
+    f.inputs :password, required: true
     f.has_many :roles do |r|
       r.input :name, as: :select, collection: Role.names.keys
     end
