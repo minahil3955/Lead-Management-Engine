@@ -4,6 +4,7 @@ class PhasesController < ApplicationController
   before_action :set_phase, only: %i[show edit update engineer complete]
   before_action :set_project_lead
   before_action :set_engineer, only: :show
+  before_action :authorize_phase, only: %i[edit update]
 
   def index
     @phases = @set_project_lead.phases
@@ -15,16 +16,14 @@ class PhasesController < ApplicationController
 
   def new
     @phase = @set_project_lead.phases.new
-    authorize @phase
+    authorize_phase
   end
 
-  def edit
-    authorize @phase
-  end
+  def edit; end
 
   def create
     @phase = @set_project_lead.phases.new(phase_params)
-    authorize @phase
+    authorize_phase
     return render :new, notice: 'Phase not Saved !' unless @phase.save
 
     redirect_to project_lead_phases_path, notice: 'Phase was successfully created.'
@@ -42,7 +41,6 @@ class PhasesController < ApplicationController
   end
 
   def update
-    authorize @phase
     if @phase.update(phase_params)
       redirect_to project_lead_phases_url, notice: 'Phase Updated !'
     else render 'edit'
@@ -75,5 +73,9 @@ class PhasesController < ApplicationController
   def set_engineer
     @phase_engineers = @phase.users
     @engineers = User.engineer
+  end
+
+  def authorize_phase
+    authorize @phase
   end
 end

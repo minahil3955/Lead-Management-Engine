@@ -3,6 +3,7 @@
     <% if client.errors.any? %>
       <div id="error_explanation">
         <h5><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h5>
+
         <ul>
           <% client.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -13,31 +14,27 @@
 
     <div class='row'>
       <div class="col-md-8 offset-md-3">
-          <div  class='form-group'>
-          <p>
-           <%= form.label :name %>
-          </p>
+        <div  class='form-group'>
+          <p><%= form.label :name %></p>
+
           <%= form.text_field :name, required: true %>
         </div>
 
         <div class = 'form-group'>
-          <p>
-            <%= form.label :address %>
-          </p>
+          <p> <%= form.label :address %></p>
+
           <%= form.text_field :address, required: true %>
         </div>
 
         <div class = 'form-group'>
-          <p>
-            <%= form.label :email %>
-          </p>
+          <p><%= form.label :email %></p>
+
           <%= form.text_field :email, required: true %>
         </div>
 
         <div class = 'form-group'>
-          <p>
-            <%= form.label :contact %>
-          </p>
+          <p><%= form.label :contact %></p>
+          
           <%= form.text_field :contact, required: true %>
         </div>
 

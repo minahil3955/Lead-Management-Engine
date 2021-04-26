@@ -1,23 +1,25 @@
+<h3 class="bg-secondary text-white text-center py-2">Client</h3>
 
-<p>
-  <strong>Client Name:</strong>
-  <%= @client.name %>
-</p>
+<table class="table table-striped my-5">
+  <tr>
+    <th>Client Name</th>
+    <td><%= @client.name %></td>
+  </tr>
 
-<p>
-  <strong>Address:</strong>
-  <%= @client.address %>
-</p>
+  <tr>
+    <th>Address</th>
+    <td><%= @client.address %></td>
+  </tr>
 
-<p>
-  <strong>Email:</strong>
-  <%= @client.email %>
-</p>
+  <tr>
+    <th>Email</th>
+    <td><%= @client.email %></td>
+  </tr>
 
-<p>
-  <strong>Contact:</strong>
-  <%= @client.contact %>
-</p>
+  <tr>
+    <th>Contact</th>
+    <td><%= @client.contact %></td>
+  </tr>
+</table>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>

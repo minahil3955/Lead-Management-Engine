@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     resources :comments, module: :project_leads
     resources :phases do
       resources :comments, module: :phases
-       get 'complete', on: :member
-       post 'engineer', on: :member
+      get 'complete', on: :member
+      post 'engineer', on: :member
     end
   end
 
