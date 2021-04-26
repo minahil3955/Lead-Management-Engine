@@ -19,8 +19,11 @@
         <td><%= link_to project_lead.client.name, client_path(project_lead.client_id) %></td>
         <td><%= project_lead.created_at.to_date %></td>
         <td><%= link_to 'Show', project_lead %></td>
-        <td><%= link_to 'Edit', edit_project_lead_path(project_lead) %></td>
-        <td><%= link_to 'Delete', project_lead, method: :delete, data: { confirm: 'Are you sure ?' } %></td>
+
+        <% if policy(project_lead).owner? %>
+          <td><%= link_to 'Edit', edit_project_lead_path(project_lead) %></td>
+          <td><%= link_to 'Delete', project_lead, method: :delete, data: { confirm: 'Are you sure ?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -29,7 +32,7 @@
 <div class='row'>
   <div class='col-md-8 offset-md-5'>
     <%if current_user.business_developer? %>
-      <button  class="btn btn-dark"><%= link_to 'Create New Lead', new_project_lead_path %></button>
+      <%= link_to 'Create New Lead', new_project_lead_path, class: 'btn btn-secondary text-white'%>
     <% end %>
   </div>
 <div>
