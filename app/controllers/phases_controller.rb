@@ -4,10 +4,10 @@ class PhasesController < ApplicationController
   before_action :set_phase, only: %i[show edit update engineer complete]
   before_action :set_project_lead
   before_action :set_engineer, only: :show
-  before_action :authorize_phase, only: %i[edit update]
+  before_action :authorize_phase, only: %i[edit update complete engineer]
 
   def index
-    @phases = @set_project_lead.phases
+    @phases = @set_project_lead.phases.includes(:project_lead)
   end
 
   def show
@@ -29,6 +29,13 @@ class PhasesController < ApplicationController
     redirect_to project_lead_phases_path, notice: 'Phase was successfully created.'
   end
 
+  def update
+    if @phase.update(phase_params)
+      redirect_to project_lead_phases_url, notice: 'Phase Updated !'
+    else
+      render 'edit'
+    end
+  end
   def engineer
     engineer = User.find(params[:engineer][:user_id])
     if @phase.users.exists?(engineer.id)
@@ -40,18 +47,11 @@ class PhasesController < ApplicationController
     redirect_to project_lead_phase_url(@phase.project_lead_id)
   end
 
-  def update
-    if @phase.update(phase_params)
-      redirect_to project_lead_phases_url, notice: 'Phase Updated !'
-    else render 'edit'
-    end
-  end
-
   def complete
     if @phase.inactive!
       flash[:notice] = 'Phase marked as complete successfully'
     else
-      flash[:alert] = 'Phase can not be mark as complete '
+      flash[:alert] = 'Phase can not be mark as complete'
     end
     redirect_to project_lead_phases_url(@phase.project_lead_id)
   end

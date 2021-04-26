@@ -20,10 +20,5 @@ class AddDbValidations < ActiveRecord::Migration[6.1]
     change_column :roles, :name, :integer, null: false
 
     change_column :users, :name, :string, null: false
-
-
-
-
-
   end
 end

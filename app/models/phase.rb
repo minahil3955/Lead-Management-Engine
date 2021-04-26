@@ -2,9 +2,9 @@
 
 class Phase < ApplicationRecord
   has_and_belongs_to_many :users
+  has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :project_lead
   belongs_to :user
-  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :due_date, :status, :name, presence: true
   validate :due_date_in_future
