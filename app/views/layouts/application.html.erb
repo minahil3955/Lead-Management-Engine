@@ -15,45 +15,45 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <a class="navbar-brand text-white">Lead Management</a>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+      <a class="navbar-brand text-white">Lead Management</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
+      <div class="collapse navbar-collapse" id="navbarText">
         <% if user_signed_in?  %>
-          <li class="navbar-text px-2">
-            <%= link_to 'Leads', project_leads_path %>
-          </li>
+          <ul class="navbar-nav mr-auto">
+            <li class="navbar-text px-2">
+              <%= link_to 'Leads', project_leads_path %>
+            </li>
 
-          <li class="navbar-text px-2">
-            <%= link_to 'Clients', clients_path %>
-          </li>
+            <li class="navbar-text px-2">
+              <%= link_to 'Clients', clients_path %>
+            </li>
 
-          <li class="navbar-text px-2">
-           <%= link_to 'Projects', projects_path %>
-          </li>
-      </ul>
+            <li class="navbar-text px-2">
+              <%= link_to 'Projects', projects_path %>
+          </ul>
 
-      <span class="navbar-text px-2 text-white">
-        <%= current_user.name %>
-      </span>
+          <span class="navbar-text px-2 text-white">
+            <%= current_user.name %>
+          </span>
 
-      <span class="navbar-text px-2 text-white">
-        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      </span>
+          <span class="navbar-text px-2 text-white">
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          </span>
 
-      <%else%>
+        <%else%>
 
-      <span class="navbar-text">
-        <%= link_to "Sign in", new_user_session_path %>
-      </span>
-    <%end%>
-  </div>
-</nav>
+          <span class="navbar-text">
+            <%= link_to "Sign in", new_user_session_path %>
+          </span>
+        <%end%>
+      </div>
+    </nav>
+
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>

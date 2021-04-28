@@ -33,7 +33,7 @@ ActiveAdmin.register User do
     f.inputs :name, required: true
     f.inputs :password, required: true
     f.has_many :roles do |r|
-      r.input :name, as: :select, collection: Role.names.keys
+      r.input :name, as: :select, collection: Role.names.map {|key, value| [key.titleize, Role.names.key(value)]}
     end
     f.actions
   end

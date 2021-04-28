@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   resources :projects, only: [:index]
   resources :clients, except: [:destroy]
   resources :project_leads do
-    resources :comments, module: :project_leads
+    resources :comments, only: [:create], module: :project_leads
     resources :phases do
-      resources :comments, module: :phases
+      resources :comments,only: [:create], module: :phases
       get 'complete', on: :member
-      post 'engineer', on: :member
+      post 'add_engineer', on: :member
     end
   end
 

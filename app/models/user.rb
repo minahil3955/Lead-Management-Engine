@@ -20,6 +20,6 @@ class User < ApplicationRecord
   scope :engineer, -> { joins(:roles).where('roles.name =? ', 1) }
 
   def business_developer?
-    roles.pluck(:name).include?('Business_Developer')
+    roles.where(name: 0).exists?
   end
 end

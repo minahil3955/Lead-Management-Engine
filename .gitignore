@@ -4,3 +4,6 @@
 /public/packs/js
 .byebug_history
 .vscode/settings.json
+
+# Ignore application configuration
+/config/application.yml
