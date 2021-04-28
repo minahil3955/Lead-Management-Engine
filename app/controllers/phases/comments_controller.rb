@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Phase
+module Phases
   class CommentsController < CommentsController
     before_action :set_commentable
 

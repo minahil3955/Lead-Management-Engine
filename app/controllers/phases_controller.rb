@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PhasesController < ApplicationController
-  before_action :set_phase, only: %i[show edit update engineer complete]
+  before_action :set_phase, only: %i[show edit update add_engineer complete]
   before_action :set_project_lead
   before_action :set_engineer, only: :show
   before_action :authorize_phase, only: %i[edit update complete engineer]
@@ -15,14 +15,14 @@ class PhasesController < ApplicationController
   end
 
   def new
-    @phase = @set_project_lead.phases.new
+    @phase = @set_project_lead.phases.includes(:project_lead).new
     authorize_phase
   end
 
   def edit; end
 
   def create
-    @phase = @set_project_lead.phases.new(phase_params)
+    @phase = @set_project_lead.phases.includes(:project_lead).new(phase_params)
     authorize_phase
     return render :new, notice: 'Phase not Saved !' unless @phase.save
 
@@ -36,7 +36,8 @@ class PhasesController < ApplicationController
       render 'edit'
     end
   end
-  def engineer
+
+  def add_engineer
     engineer = User.find(params[:engineer][:user_id])
     if @phase.users.exists?(engineer.id)
       flash[:alert] = 'Already Assigned'

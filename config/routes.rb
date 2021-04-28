@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :phases do
       resources :comments,only: [:create], module: :phases
       get 'complete', on: :member
-      post 'engineer', on: :member
+      post 'add_engineer', on: :member
     end
   end
 

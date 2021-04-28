@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDbValidations < ActiveRecord::Migration[6.1]
   def change
     change_column :clients, :name, :string, null: false
